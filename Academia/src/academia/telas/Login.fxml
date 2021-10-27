@@ -22,7 +22,7 @@
     </left>
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER">
-            <TextField layoutX="60.0" layoutY="221.0" prefHeight="30.0" prefWidth="230.0" promptText="Login" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
+            <TextField fx:id="tex_login" layoutX="60.0" layoutY="221.0" prefHeight="30.0" prefWidth="230.0" promptText="Login" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
             <cursor>
                <Cursor fx:constant="TEXT" />
             </cursor></TextField>
@@ -44,7 +44,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             </Button>
-            <PasswordField layoutX="59.0" layoutY="275.0" prefHeight="30.0" prefWidth="230.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
+            <PasswordField fx:id="tex_senha" layoutX="59.0" layoutY="275.0" prefHeight="30.0" prefWidth="230.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
             <cursor>
                <Cursor fx:constant="TEXT" />
             </cursor></PasswordField>
