@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class PrincipalControle implements Initializable {
 
         instancia = loader.getController();
 
+        //Transforma uma janela em modal e não deixar arrastar
+        //janela.initModality(Modality.APPLICATION_MODAL);
         janela.show();
     }
 

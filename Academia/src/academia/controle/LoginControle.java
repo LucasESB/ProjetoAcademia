@@ -2,11 +2,15 @@ package academia.controle;
 
 import academia.dao.UsuarioDao;
 import academia.entidades.Usuario;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,21 +19,57 @@ import java.util.ResourceBundle;
 
 public class LoginControle  implements Initializable {
 
-    /**
-     * Instancia da janela
-     */
-    public static Stage janela;
-
-    /**
-     * Objeto de conexão com a tabela Usuario
-     */
-    private UsuarioDao usuarioDao;
+    @FXML
+    private Button bot_logar;
 
     @FXML
     private TextField tex_login;
 
     @FXML
     private PasswordField tex_senha;
+
+    /**
+     * Instancia da janela
+     */
+    private Stage janela;
+
+    /**
+     * Objeto de conexão com a tabela Usuario
+     */
+    private UsuarioDao usuarioDao = UsuarioDao.getInstance();
+
+    public LoginControle() throws Exception {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        tex_login.setText("Master");
+        tex_senha.setText("Master");
+        setEventos();
+    }
+
+    private void setEventos(){
+        tex_login.setOnKeyPressed(eventHandlerKey);
+        tex_senha.setOnKeyPressed(eventHandlerKey);
+    }
+
+    private final EventHandler<KeyEvent> eventHandlerKey = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent keyEvent) {
+            try {
+                if(keyEvent.getCode() == KeyCode.ENTER){
+                    if(keyEvent.getSource().equals(tex_login)) {
+                        tex_senha.requestFocus();
+                    }
+                    else if(keyEvent.getSource().equals(tex_senha)) {
+                        login();
+                    }
+                }
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+    };
 
     @FXML
     void sair() {
@@ -44,6 +84,8 @@ public class LoginControle  implements Initializable {
             alert.setHeaderText("Erro");
             alert.setContentText("Os campos Login e Senha são de preenchimento obrigatorio.");
             alert.show();
+
+            tex_login.requestFocus();
             return;
         }
 
@@ -52,23 +94,16 @@ public class LoginControle  implements Initializable {
 
         if(usuario == null){
             alertaLoginOuSenhaIncorreto();
+            tex_senha.requestFocus();
             return;
         }else if(!usuario.getLogin().equals(tex_login.getText()) || !tex_senha.getText().equals(usuario.getSenha())){
             alertaLoginOuSenhaIncorreto();
+            tex_senha.requestFocus();
             return;
         }
 
-        LoginControle.janela.close();
+        janela.close();
         PrincipalControle.abrirTela();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            usuarioDao = UsuarioDao.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -93,5 +128,9 @@ public class LoginControle  implements Initializable {
         alert.setHeaderText("Erro");
         alert.setContentText("Login ou Senha incorreto.");
         alert.show();
+    }
+
+    public void setJanela(Stage janela) {
+        this.janela = janela;
     }
 }

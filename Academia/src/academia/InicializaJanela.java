@@ -14,10 +14,15 @@ public class InicializaJanela extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Login.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/academia/telas/Login.fxml")));
+        Parent root = loader.load();
+
+        LoginControle loginControle = loader.getController();
+        loginControle.setJanela(primaryStage);
+
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root));
-        LoginControle.janela = primaryStage;
+
         primaryStage.show();
     }
     

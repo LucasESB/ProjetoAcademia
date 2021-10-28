@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLDecoder;
 import java.sql.*;
 
 public class MySql {
@@ -96,7 +97,11 @@ public class MySql {
      */
     public void setConexao() {
         try {
-            String caminhoArquivoConfig = System.getProperty("user.dir").concat("\\..\\config\\db.ini");
+            String path = MySql.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+            path = path.substring (0, path.lastIndexOf ("/") + 1);
+            String caminhoArquivoConfig = URLDecoder.decode(path, "UTF-8");
+            caminhoArquivoConfig = caminhoArquivoConfig.concat("../config/db.ini");
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(caminhoArquivoConfig), "UTF-8"));
             String linha = reader.readLine();
 
