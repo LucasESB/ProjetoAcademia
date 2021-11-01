@@ -1,10 +1,12 @@
 package academia.dao;
 
 import academia.conexao.MySql;
+import academia.conexao.Sql;
 import academia.entidades.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UsuarioDao {
     /**
@@ -64,6 +66,81 @@ public class UsuarioDao {
      */
     private void iniciaDaosSecundarios() { }
 
+    /////////////////////////////////
+    //////// Metodos INSERT ////////
+    /////////////////////////////////
+
+    /**
+     * Metodo responsavel pela inserção de um novo usuario
+     * @param usuario
+     * @return
+     * @throws SQLException
+     */
+    public int inserir(Usuario usuario) throws SQLException {
+        Object[] dados = new Object[]{
+            usuario.getLogin(),
+            usuario.getNome(),
+            usuario.getSenha(),
+            usuario.isAdmin()
+        };
+
+        return db.getGenerateKey(Sql.USUARIOS_INSERT, dados);
+    }
+
+    /////////////////////////////////
+    //////// Metodos UPDATE /////////
+    /////////////////////////////////
+
+    public boolean atualizar(Usuario usuario) throws SQLException {
+        Object[] dados = new Object[]{
+                usuario.getLogin(),
+                usuario.getNome(),
+                usuario.getSenha(),
+                usuario.isAdmin(),
+                usuario.getId()
+        };
+
+        return db.executeUpdate(Sql.USUARIOS_UPDATE, dados);
+    }
+
+    /////////////////////////////////
+    //////// Metodos DELETE /////////
+    /////////////////////////////////
+
+    public boolean excluir(Usuario usuario) throws SQLException {
+        return db.executeUpdate(Sql.USUARIOS_DELETE, usuario.getId());
+    }
+
+    /////////////////////////////////
+    ////////// Metodos GET //////////
+    /////////////////////////////////
+
+    /**
+     * Metodo responsavel por busacar todos os usuarios
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<Usuario> getUsuarios() throws SQLException{
+        return getUsuarios(null);
+    }
+
+    /**
+     * Metodo responsacel por buscar apartir de uma sql complementar
+     * @param sqlComplementar
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<Usuario> getUsuarios(String sqlComplementar) throws SQLException{
+        ResultSet resultSet = db.getResultset(Sql.USUARIOS_SELCT_ALL.concat(" ").concat(sqlComplementar == null ? "" : sqlComplementar));
+        ArrayList<Usuario> listUsuarios = new ArrayList<>();
+
+        while (resultSet.next()){
+            listUsuarios.add(getUsurioPorResultSet(resultSet));
+        }
+
+        return listUsuarios;
+    }
+
     /**
      * Metodo responsavel por buscar um usuario pelo Login e Senha
      *
@@ -73,7 +150,7 @@ public class UsuarioDao {
      * @throws Exception
      */
     public Usuario getUsuarioPorLoginSenha(String login, String senha) throws Exception{
-        ResultSet resultSet = db.getResultset("SELECT * FROM usuarios WHERE login = ? AND senha = ?", login, senha);
+        ResultSet resultSet = db.getResultset(Sql.USUARIOS_SELCT_ALL.concat(" WHERE login = ? AND senha = ?"), login, senha);
 
         if(resultSet.next()){
             return getUsurioPorResultSet(resultSet);

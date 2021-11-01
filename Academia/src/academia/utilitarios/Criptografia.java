@@ -16,7 +16,7 @@ public class Criptografia {
     /**
      * Chave de composicao para formacao de criptografia e descriptografia
      */
-    private static final byte[] CHAVE_CRIPTOGRAFIA = "*10172646000100*".getBytes();
+    private static final byte[] CHAVE_CRIPTOGRAFIA = "*01000011000100*".getBytes();
 
     /**
      * Algoritmos para criptografia

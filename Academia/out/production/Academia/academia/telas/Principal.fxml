@@ -25,7 +25,7 @@
                         </ImageView>
                      </graphic>
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial" size="13.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -46,7 +46,7 @@
                         </ImageView>
                      </graphic>
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial" size="13.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     PRIMARY KEY (id)
 ) COMMENT 'Armazena os usuarios do sistema';
 
-INSERT IGNORE INTO usuarios (login, nome, senha, admin) VALUES ('Master', 'MASTER', 'Master', true);
+INSERT IGNORE INTO usuarios (login, nome, senha, admin) VALUES ('Master', 'MASTER', 'b8e8b80c9a269375a8526b12eefc8cbf', true);
 
 DROP TABLE IF EXISTS contasReceber;
 CREATE TABLE IF NOT EXISTS contasReceber (

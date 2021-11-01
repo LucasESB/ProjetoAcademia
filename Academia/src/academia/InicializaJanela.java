@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -22,6 +23,7 @@ public class InicializaJanela extends Application {
 
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().add(new Image(getClass().getResource("/academia/assets/icons/upfitsistema.png").toURI().toString()));
 
         primaryStage.show();
     }

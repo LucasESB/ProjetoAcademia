@@ -7,11 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -27,13 +29,15 @@ public class PrincipalControle implements Initializable {
     @FXML
     private Button bot_menuItemUsuarios;
 
-    private static PrincipalControle instancia;
-
+    /**
+     * Instancia da janela
+     */
     private static Stage janela;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setEventos();
+        abrirTelaHome();
     }
 
     /**
@@ -65,10 +69,18 @@ public class PrincipalControle implements Initializable {
     };
 
     private void abrirTelaHome(){
+        addRemoveBordaArrendodaBotao(bot_menuItemHome);
+    }
 
+    private void addRemoveBordaArrendodaBotao(Button botao){
+        bot_menuItemHome.setStyle(null);
+        bot_menuItemUsuarios.setStyle(null);
+
+        botao.setStyle("-fx-background-color:  #54B1F3; -fx-background-radius: 20px 0px 0px 20px;");
     }
 
     private void abrirTelaUsuario() throws IOException {
+        addRemoveBordaArrendodaBotao(bot_menuItemUsuarios);
         BorderPane a = (BorderPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Usuario.fxml")));
         areaVisualizacao.getChildren().setAll(a);
     }
@@ -77,20 +89,19 @@ public class PrincipalControle implements Initializable {
     /**
      * Metodo responsavel por abrir a janela
      */
-    public static void abrirTela() throws IOException {
+    public static void abrirTela() throws IOException, URISyntaxException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(PrincipalControle.class.getResource("/academia/telas/Principal.fxml"));
         BorderPane page = (BorderPane) loader.load();
 
         janela = new Stage();
-        janela.setTitle("Tela Principal");
+        janela.setTitle("UpFit - Sistema");
+
         Scene scene = new Scene(page);
         janela.setScene(scene);
 
-        instancia = loader.getController();
+        janela.getIcons().add(new Image(PrincipalControle.class.getResource("/academia/assets/icons/upfitsistema.png").toURI().toString()));
 
-        //Transforma uma janela em modal e não deixar arrastar
-        //janela.initModality(Modality.APPLICATION_MODAL);
         janela.show();
     }
 

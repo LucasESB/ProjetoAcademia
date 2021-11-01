@@ -2,6 +2,8 @@ package academia.controle;
 
 import academia.dao.UsuarioDao;
 import academia.entidades.Usuario;
+import academia.utilitarios.Criptografia;
+import academia.utilitarios.InstanciaSistema;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -81,7 +83,7 @@ public class LoginControle  implements Initializable {
         if(isCamposInvalidos()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Alerta de Erro");
-            alert.setHeaderText("Erro");
+            alert.setHeaderText("Erro ao tentar logar");
             alert.setContentText("Os campos Login e Senha são de preenchimento obrigatorio.");
             alert.show();
 
@@ -89,18 +91,22 @@ public class LoginControle  implements Initializable {
             return;
         }
 
-        Usuario usuario = usuarioDao.getUsuarioPorLoginSenha(tex_login.getText(), tex_senha.getText());
-        // TODO descriptografar senha do usuario
+        Usuario usuario = usuarioDao.getUsuarioPorLoginSenha(tex_login.getText(), Criptografia.cifrar(tex_senha.getText()));
+
 
         if(usuario == null){
             alertaLoginOuSenhaIncorreto();
             tex_senha.requestFocus();
             return;
-        }else if(!usuario.getLogin().equals(tex_login.getText()) || !tex_senha.getText().equals(usuario.getSenha())){
+        }
+
+        if(!usuario.getLogin().equals(tex_login.getText()) || !tex_senha.getText().equals(Criptografia.decifrar(usuario.getSenha()))){
             alertaLoginOuSenhaIncorreto();
             tex_senha.requestFocus();
             return;
         }
+
+        InstanciaSistema.setUsuarioLogado(usuario);
 
         janela.close();
         PrincipalControle.abrirTela();

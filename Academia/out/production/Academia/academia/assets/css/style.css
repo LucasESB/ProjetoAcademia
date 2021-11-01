@@ -6,7 +6,3 @@
 
 }
 
-.button:focused {
-    -fx-background-color:  #54B1F3;
-    -fx-background-radius: 20px 0px 0px 20px;
-}

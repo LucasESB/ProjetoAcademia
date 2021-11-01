@@ -5,6 +5,7 @@ module Academia {
 
     opens academia;
     opens academia.controle;
+    opens academia.entidades;
 
     exports academia.controle;
 }
