@@ -6,16 +6,23 @@ import academia.utilitarios.Criptografia;
 import academia.utilitarios.InstanciaSistema;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +40,7 @@ public class LoginControle  implements Initializable {
     /**
      * Instancia da janela
      */
-    private Stage janela;
+    private static Stage janela;
 
     /**
      * Objeto de conexão com a tabela Usuario
@@ -108,8 +115,8 @@ public class LoginControle  implements Initializable {
 
         InstanciaSistema.setUsuarioLogado(usuario);
 
-        janela.close();
         PrincipalControle.abrirTela();
+        janela.close();
     }
 
     /**
@@ -136,7 +143,22 @@ public class LoginControle  implements Initializable {
         alert.show();
     }
 
-    public void setJanela(Stage janela) {
-        this.janela = janela;
+    /**
+     * Metodo responsavel por abrir a janela
+     */
+    public static void abrirTela() throws IOException, URISyntaxException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(LoginControle.class.getResource("/academia/telas/Login.fxml"));
+        BorderPane page = (BorderPane) loader.load();
+
+        janela = new Stage();
+        janela.initStyle(StageStyle.UNDECORATED);
+
+        Scene scene = new Scene(page);
+        janela.setScene(scene);
+
+        janela.getIcons().add(new Image(PrincipalControle.class.getResource("/academia/assets/icons/upfitsistema.png").toURI().toString()));
+
+        janela.show();
     }
 }

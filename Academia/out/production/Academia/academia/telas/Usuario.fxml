@@ -16,7 +16,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="80.0" prefWidth="656.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="tex_nome" prefHeight="30.0" prefWidth="261.0" promptText="Pesquise pelo nome do usuario">
+            <TextField fx:id="tex_nome" prefHeight="30.0" prefWidth="261.0" promptText="Pesquise pelo nome do Usuario">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
