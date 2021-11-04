@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="224.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.UsuarioInserirEditarControle">
+<AnchorPane prefHeight="224.0" prefWidth="426.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="academia.controle.UsuarioInserirEditarControle">
    <children>
       <TextField fx:id="tex_nome" layoutX="15.0" layoutY="35.0" prefHeight="30.0" prefWidth="382.0" promptText="Digite um nome para o Usuario" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
          <font>
@@ -70,7 +69,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="bot_cancelar" layoutX="204.0" layoutY="178.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Cancelar">
+      <Button fx:id="bot_cancelar" layoutX="204.0" layoutY="178.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Cancelar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="120.0">
          <graphic>
             <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>

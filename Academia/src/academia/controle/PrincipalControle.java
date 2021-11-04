@@ -47,7 +47,8 @@ public class PrincipalControle implements Initializable {
     private static Stage janela;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) { }
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 
     private void configuracoes() throws IOException {
         setEventos();
@@ -57,9 +58,10 @@ public class PrincipalControle implements Initializable {
     /**
      * Construtor
      */
-    public PrincipalControle(){ }
+    public PrincipalControle() {
+    }
 
-    private void setEventos(){
+    private void setEventos() {
         bot_menuItemHome.setOnAction(eventHandlerAction);
         bot_menuItemAlunos.setOnAction(eventHandlerAction);
         bot_menuItemRecebimentos.setOnAction(eventHandlerAction);
@@ -100,7 +102,7 @@ public class PrincipalControle implements Initializable {
         areaVisualizacao.getChildren().setAll(a);
     }
 
-    private void addERemoveBordaArrendodaBotao(Button botao){
+    private void addERemoveBordaArrendodaBotao(Button botao) {
         bot_menuItemHome.setStyle(null);
         bot_menuItemAlunos.setStyle(null);
         bot_menuItemRecebimentos.setStyle(null);

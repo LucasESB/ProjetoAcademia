@@ -43,10 +43,11 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="tab_usuarios" prefHeight="238.0" prefWidth="585.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tab_alunos" prefHeight="238.0" prefWidth="585.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="col_codigo" editable="false" minWidth="75.0" prefWidth="75.0" text="Código" />
-                <TableColumn fx:id="col_nome" editable="false" prefWidth="549.599984741211" text="Nome" />
+                <TableColumn fx:id="col_nome" editable="false" prefWidth="411.1999969482422" text="Nome" />
+            <TableColumn fx:id="col_telefone" prefWidth="138.4000244140625" text="Telefone" />
             </columns>
             <BorderPane.margin>
                 <Insets left="15.0" right="15.0" />

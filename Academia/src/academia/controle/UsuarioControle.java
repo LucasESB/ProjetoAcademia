@@ -68,9 +68,10 @@ public class UsuarioControle implements Initializable {
     /**
      * Construtor
      */
-    public UsuarioControle() throws Exception{ }
+    public UsuarioControle() throws Exception {
+    }
 
-    private void setEventos(){
+    private void setEventos() {
         bot_pesquisar.setOnAction(eventHandlerAction);
         bot_inserir.setOnAction(eventHandlerAction);
         bot_editar.setOnAction(eventHandlerAction);
@@ -85,19 +86,16 @@ public class UsuarioControle implements Initializable {
         @Override
         public void handle(ActionEvent event) {
             try {
-                if(event.getSource().equals(bot_pesquisar)){
+                if (event.getSource().equals(bot_pesquisar)) {
                     filtrar();
-                }
-                else if(event.getSource().equals(bot_inserir)){
+                } else if (event.getSource().equals(bot_inserir)) {
                     inserir();
-                }
-                else if(event.getSource().equals(bot_editar)){
+                } else if (event.getSource().equals(bot_editar)) {
                     editar();
-                }
-                else if(event.getSource().equals(bot_excluir)){
+                } else if (event.getSource().equals(bot_excluir)) {
                     excluir();
                 }
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
@@ -109,20 +107,20 @@ public class UsuarioControle implements Initializable {
     private final EventHandler<KeyEvent> eventHandlerKey = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent keyEvent) {
-           try {
-                if(keyEvent.getSource().equals(tex_nome) && keyEvent.getCode() == KeyCode.ENTER){
+            try {
+                if (keyEvent.getSource().equals(tex_nome) && keyEvent.getCode() == KeyCode.ENTER) {
                     filtrar();
                 }
-           }catch (Exception ex){
-               ex.printStackTrace();
-           }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     };
 
     private void filtrar() throws SQLException {
         String sqlComplementar = "WHERE ";
 
-        if(tex_nome.getText() != null){
+        if (tex_nome.getText() != null) {
             sqlComplementar += "nome LIKE '" + tex_nome.getText() + "%'";
         }
 
@@ -133,7 +131,7 @@ public class UsuarioControle implements Initializable {
     private void inserir() throws Exception {
         Usuario usuario = UsuarioInserirEditarControle.showDialogInserir();
 
-        if(usuario == null){
+        if (usuario == null) {
             return;
         }
 
@@ -143,11 +141,11 @@ public class UsuarioControle implements Initializable {
     }
 
     public void addObservableListUsuario(Usuario usuario) {
-        if(observableListUsuario == null ){
+        if (observableListUsuario == null) {
             List<Usuario> list = new ArrayList<>();
             list.add(usuario);
             observableListUsuario = FXCollections.observableList(list);
-        }else {
+        } else {
             observableListUsuario.add(usuario);
         }
     }
@@ -155,16 +153,16 @@ public class UsuarioControle implements Initializable {
     private void editar() throws Exception {
         Usuario usuario = tab_usuarios.getSelectionModel().getSelectedItem();
 
-        if(usuario == null){
+        if (usuario == null) {
             alertaSelecioneUmRegistro();
-           return;
+            return;
         }
 
         UsuarioInserirEditarControle.showDialogEditar(usuario);
         tab_usuarios.refresh();
     }
 
-    private void alertaSelecioneUmRegistro(){
+    private void alertaSelecioneUmRegistro() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Aviso");
         alert.setHeaderText("Janela de Aviso");
@@ -172,10 +170,10 @@ public class UsuarioControle implements Initializable {
         alert.show();
     }
 
-    private void excluir() throws  Exception {
+    private void excluir() throws Exception {
         Usuario usuario = tab_usuarios.getSelectionModel().getSelectedItem();
 
-        if(usuario == null){
+        if (usuario == null) {
             alertaSelecioneUmRegistro();
             return;
         }
@@ -190,17 +188,17 @@ public class UsuarioControle implements Initializable {
         alert.setContentText("Deseja realmente excluir o usuário " + usuario.getNome() + " ?");
         alert.getButtonTypes().setAll(bot_nao, bot_sim);
         alert.showAndWait().ifPresent(b -> {
-            if(b == bot_sim){
+            if (b == bot_sim) {
                 excluir = true;
             }
         });
 
-        if(excluir){
+        if (excluir) {
             boolean excluido = usuarioDao.excluir(usuario);
-            if(excluido) {
+            if (excluido) {
                 tab_usuarios.getItems().remove(usuario);
                 tab_usuarios.refresh();
-            }else {
+            } else {
                 Alert alertErro = new Alert(Alert.AlertType.ERROR);
                 alertErro.setTitle("Erro");
                 alertErro.setHeaderText("Janela de Erro");

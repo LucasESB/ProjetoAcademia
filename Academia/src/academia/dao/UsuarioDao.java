@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioDao {
+
     /**
      * Instancia da classe para que não seja criada várias instancias da classe
      * acarretando a sobrecarga do servidor
@@ -66,12 +67,23 @@ public class UsuarioDao {
      */
     private void iniciaDaosSecundarios() { }
 
+    /**
+     * Metodo derruba a conecxao
+     *
+     * @return
+     * @throws Exception Caso algum erro ocorra
+     */
+    public boolean disconnect() throws Exception {
+        return db.disconnect();
+    }
+
     /////////////////////////////////
-    //////// Metodos INSERT ////////
+    //////// Metodos INSERT /////////
     /////////////////////////////////
 
     /**
      * Metodo responsavel pela inserção de um novo usuario
+     *
      * @param usuario
      * @return
      * @throws SQLException
@@ -91,6 +103,13 @@ public class UsuarioDao {
     //////// Metodos UPDATE /////////
     /////////////////////////////////
 
+    /**
+     * Metodo responsavel por atualuzar os dados do Usuario
+     *
+     * @param usuario
+     * @return
+     * @throws SQLException
+     */
     public boolean atualizar(Usuario usuario) throws SQLException {
         Object[] dados = new Object[]{
                 usuario.getLogin(),
@@ -107,6 +126,12 @@ public class UsuarioDao {
     //////// Metodos DELETE /////////
     /////////////////////////////////
 
+    /**
+     * Metodo responsavel por excluir um usuario especifico
+     * @param usuario
+     * @return
+     * @throws SQLException
+     */
     public boolean excluir(Usuario usuario) throws SQLException {
         return db.executeUpdate(Sql.USUARIOS_DELETE, usuario.getId());
     }
@@ -175,15 +200,5 @@ public class UsuarioDao {
         usuario.setAdmin(resultSet.getBoolean("admin"));
 
         return usuario;
-    }
-
-    /**
-     * Metodo derruba a conecxao
-     *
-     * @return
-     * @throws Exception Caso algum erro ocorra
-     */
-    public boolean disconnect() throws Exception {
-        return db.disconnect();
     }
 }

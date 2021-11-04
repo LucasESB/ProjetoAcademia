@@ -193,7 +193,7 @@ public class UsuarioInserirEditarControle implements Initializable {
         return usuario;
     }
 
-    private void inserir() throws Exception{
+    private void inserir() throws Exception {
         Usuario usuario = getDadosUsuario();
         int codigo = usuarioDao.inserir(usuario);
 
@@ -235,5 +235,4 @@ public class UsuarioInserirEditarControle implements Initializable {
 
         janela.showAndWait();
     }
-
 }

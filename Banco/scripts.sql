@@ -18,14 +18,37 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 INSERT IGNORE INTO usuarios (login, nome, senha, admin) VALUES ('Master', 'MASTER', 'b8e8b80c9a269375a8526b12eefc8cbf', true);
 
-DROP TABLE IF EXISTS contasReceber;
-CREATE TABLE IF NOT EXISTS contasReceber (
-	id 			SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial do contas a receber',
-    dataemissao DATETIME NOT NULL COMMENT 'Armazena a data e a hora do computador em que o dado foi inserido',
-    vbruto 		DECIMAL(10,2) UNSIGNED NOT NULL COMMENT 'Armazena o valor bruto do conta a receber',
-    vdesconto 	DECIMAL(10,2) UNSIGNED NOT NULL COMMENT 'Armazena o valor do desconto aplicado no conta a receber',
-    vliquido 	DECIMAL(10,2) UNSIGNED NOT NULL COMMENT 'Armazena o valor liquido do conta a receber',
+DROP TABLE IF EXISTS alunos;
+CREATE TABLE IF NOT EXISTS alunos (
+	id 				MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial do aluno',
+    nome 			VARCHAR(40) NOT NULL COMMENT 'Informa o nome do usuario',
+    telefone		VARCHAR(11) NOT NULL COMMENT 'Informa o telefone do usuario',
+    email			VARCHAR(60) NULL COMMENT 'Informa o email do usuario',
+    cpf				CHAR(11) NOT NULL COMMENT 'Informa o cpf do usuario',
+    sexo			ENUM ('M','F') NOT NULL COMMENT 'Informa o sexo do usuario M - Masculino F - Feminino',
+    datanascimento 	DATETIME NOT NULL COMMENT 'Informa a data de nascimento do usuario',
+    datacadastro 	DATETIME NOT NULL COMMENT 'Informa a data em que o usuario em questão foi cadastrado',
+    observacao		TEXT NULL COMMENT 'Informa uma observação sobre o usuario',
     KEY idx_id (id),
-    KEY idx_dataemissao (dataemissao),
     PRIMARY KEY (id)
-) COMMENT 'Armazena os contas a receber da empresa';
+);
+
+DROP TABLE IF EXISTS recebimentos;
+CREATE TABLE IF NOT EXISTS recebimentos (
+	id 				MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial do recebimento',
+    aluno_id		MEDIUMINT UNSIGNED NOT NULL COMMENT 'Armazena o id do aluno',
+    usuario_id		SMALLINT UNSIGNED NOT NULL COMMENT 'Armazena o id do usuario que inseriu o registro',
+    dataVencimento  DATETIME NOT NULL COMMENT 'Informa a data de vencimento do recebimento',
+    dataPagamento 	DATETIME NOT NULL COMMENT 'Informa a data de pagamento do recebimento',
+    formaPagamento	ENUM ('1', '2', '3', '4', '5') NOT NULL COMMENT 'Informa a forma de pagamento utilizada sendo: 1 - Dinheiro, 2 - PIX, 3 - Transferência, 4 - Cartão de Crédito, 5 - Cartão de Débito',
+    vRecebimento	DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor do recebimento',
+    vDesconto		DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor de disconto aplicado no recebimento',
+    vTotal			DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor total do recebimento',
+    matricula		TINYINT(1) NOT NULL DEFAULT b'0' COMMENT 'Informa se o recebimento é da maatriculo',
+    KEY idx_id (id),
+    KEY idx_aluno_id (aluno_id),
+    KEY idx_usuario_id (usuario_id),
+    KEY idx_dataVencimento (dataVencimento),
+    KEY idx_dataPagamento (dataPagamento),
+    PRIMARY KEY (id)
+);
