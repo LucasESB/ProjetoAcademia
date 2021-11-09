@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="323.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.RecebimentosInserirEditarControle">
+   <children>
+      <Label layoutX="27.0" layoutY="14.0" prefHeight="16.0" prefWidth="417.0" text="Aluno" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tex_aluno" editable="false" layoutX="15.0" layoutY="31.0" prefHeight="30.0" prefWidth="316.0" promptText="Dê um duplo click para selecionar um Aluno" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="115.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TextField>
+      <Button fx:id="bot_salvar" layoutX="247.0" layoutY="364.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/confirm.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="bot_cancelar" layoutX="142.0" layoutY="342.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Cancelar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="120.0">
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/remove.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="bot_inserirAluno" layoutX="334.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Adicionar" AnchorPane.rightAnchor="15.0">
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <CheckBox layoutX="160.0" layoutY="95.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="Matricula">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </CheckBox>
+      <ComboBox layoutX="15.0" layoutY="223.0" prefHeight="30.0" prefWidth="206.0" promptText="Selecione" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="15.0" layoutY="207.0" prefHeight="16.0" prefWidth="206.0" text="Forma de Pagamento" AnchorPane.leftAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <DatePicker layoutX="15.0" layoutY="95.0" prefHeight="30.0" prefWidth="135.0" />
+      <Label layoutX="15.0" layoutY="79.0" prefHeight="16.0" prefWidth="135.0" text="Data Pagamento">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField disable="true" editable="false" layoutX="15.0" layoutY="160.0" prefHeight="30.0" prefWidth="100.0" AnchorPane.leftAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="15.0" layoutY="144.0" prefHeight="16.0" prefWidth="100.0" text="Total R$" AnchorPane.leftAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="124.0" layoutY="160.0" prefHeight="30.0" prefWidth="100.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="124.0" layoutY="144.0" prefHeight="16.0" prefWidth="100.0" text="Vl. Desconto R$">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField disable="true" editable="false" layoutX="232.0" layoutY="160.0" prefHeight="30.0" prefWidth="100.0" AnchorPane.rightAnchor="189.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="232.0" layoutY="144.0" prefHeight="16.0" prefWidth="100.0" text="Total a Pagar R$" AnchorPane.rightAnchor="189.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField disable="true" editable="false" layoutX="343.0" layoutY="223.0" prefHeight="30.0" prefWidth="100.0" AnchorPane.rightAnchor="78.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="343.0" layoutY="207.0" prefHeight="16.0" prefWidth="100.0" text="Troco R$" AnchorPane.rightAnchor="78.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField editable="false" layoutX="394.0" layoutY="95.0" prefHeight="30.0" prefWidth="112.0" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="394.0" layoutY="79.0" prefHeight="16.0" prefWidth="112.0" text="Qtd Mensalidade" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <DatePicker layoutX="248.0" layoutY="95.0" prefHeight="30.0" prefWidth="135.0" />
+      <Label layoutX="248.0" layoutY="79.0" prefHeight="16.0" prefWidth="135.0" text="Dat. Primeira Mensalidade">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="233.0" layoutY="223.0" prefHeight="30.0" prefWidth="100.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="233.0" layoutY="207.0" prefHeight="16.0" prefWidth="100.0" text="Valor Pago R$">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

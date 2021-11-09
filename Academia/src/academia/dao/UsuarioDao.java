@@ -128,6 +128,7 @@ public class UsuarioDao {
 
     /**
      * Metodo responsavel por excluir um usuario especifico
+     *
      * @param usuario
      * @return
      * @throws SQLException
@@ -142,6 +143,7 @@ public class UsuarioDao {
 
     /**
      * Metodo responsavel por busacar todos os usuarios
+     *
      * @return
      * @throws SQLException
      */
@@ -150,7 +152,8 @@ public class UsuarioDao {
     }
 
     /**
-     * Metodo responsacel por buscar apartir de uma sql complementar
+     * Metodo responsacel por buscar os usuarios a partir de uma sql complementar
+     *
      * @param sqlComplementar
      * @return
      * @throws SQLException

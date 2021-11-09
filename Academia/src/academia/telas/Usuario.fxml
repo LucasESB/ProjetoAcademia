@@ -55,7 +55,7 @@
       </TableView>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="bot_inserir" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Inserir">
                <HBox.margin>
@@ -113,7 +113,7 @@
             <Insets />
          </BorderPane.margin>
          <padding>
-            <Insets right="10.0" />
+            <Insets right="15.0" />
          </padding>
       </HBox>
    </bottom>

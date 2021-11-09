@@ -101,6 +101,11 @@ public class Alunos {
     public Alunos() {
     }
 
+    public Alunos(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     /**
      * Armazena o codigo sequencial do aluno
      *
@@ -231,6 +236,10 @@ public class Alunos {
         return cpf;
     }
 
+    public String getCpfFormatado() {
+        return Textos.formatarCPF(cpf);
+    }
+
     /**
      * Informa o cpf do usuario
      *
@@ -260,15 +269,15 @@ public class Alunos {
     }
 
     public String getSexoDescricao() {
-        if(sexo.equalsIgnoreCase("F")) return "Feminino";
+        if (sexo.equalsIgnoreCase("F")) return "Feminino";
         else return "Masculino";
     }
 
-    public static List<String> getListSexo(){
+    public static List<String> getListSexo() {
         List<String> listSexo = new ArrayList<>();
         listSexo.add("Feminino");
         listSexo.add("Masculino");
-        return  listSexo;
+        return listSexo;
     }
 
     /**

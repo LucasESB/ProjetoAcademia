@@ -121,9 +121,8 @@ public class PrincipalControle implements Initializable {
 
     private void abrirTelaRecebimentos() throws IOException {
         addERemoveBordaArrendodaBotao(bot_menuItemRecebimentos);
-        //TODO Inplementar modulo de recebimentos
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Alunos.fxml")));
-//        areaVisualizacao.getChildren().setAll(a);
+        AnchorPane a = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Recebimentos.fxml")));
+        areaVisualizacao.getChildren().setAll(a);
     }
 
     private void abrirTelaFinanceiro() throws IOException {

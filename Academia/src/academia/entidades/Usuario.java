@@ -57,6 +57,11 @@ public class Usuario {
      */
     public Usuario(){ }
 
+    public Usuario(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     /**
      * Armazena o codigo sequencial do usuario
      *
