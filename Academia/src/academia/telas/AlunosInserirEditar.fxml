@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="378.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.AlunosInserirEditarControle">
+<AnchorPane prefHeight="434.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.AlunosInserirEditarControle">
    <children>
       <Button fx:id="bot_salvar" layoutX="237.0" layoutY="354.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
          <graphic>
@@ -48,12 +48,12 @@
             <Font name="Arial" size="13.0" />
          </font>
       </TextField>
-      <Label layoutX="15.0" layoutY="127.0" prefHeight="16.0" prefWidth="278.0" text="E-mail" AnchorPane.leftAnchor="15.0">
+      <Label layoutX="15.0" layoutY="186.0" prefHeight="16.0" prefWidth="278.0" text="E-mail" AnchorPane.leftAnchor="15.0">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="tex_email" layoutX="15.0" layoutY="143.0" prefHeight="30.0" prefWidth="278.0" promptText="exemplo@gmail.com" AnchorPane.leftAnchor="15.0">
+      <TextField fx:id="tex_email" layoutX="15.0" layoutY="202.0" prefHeight="30.0" prefWidth="278.0" promptText="exemplo@gmail.com" AnchorPane.leftAnchor="15.0">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
@@ -78,27 +78,47 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="158.0" layoutY="70.0" prefHeight="16.0" prefWidth="135.0" text="Data de Nascimento">
+      <Label layoutX="15.0" layoutY="128.0" prefHeight="16.0" prefWidth="135.0" text="Data de Nascimento" AnchorPane.leftAnchor="15.0">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dat_dataNascimento" layoutX="158.0" layoutY="86.0" prefHeight="30.0" prefWidth="135.0" promptText="00/00/0000" />
-      <Label layoutX="15.0" layoutY="184.0" prefHeight="16.0" prefWidth="422.0" text="Observações" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+      <DatePicker fx:id="dat_dataNascimento" layoutX="15.0" layoutY="144.0" prefHeight="30.0" prefWidth="135.0" promptText="00/00/0000" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="15.0" layoutY="243.0" prefHeight="16.0" prefWidth="422.0" text="Observações" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <TextArea fx:id="tex_observacoes" layoutX="15.0" layoutY="200.0" prefHeight="115.0" prefWidth="422.0" promptText="Digite aqui uma observação sobre o Aluno" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+      <TextArea fx:id="tex_observacoes" layoutX="15.0" layoutY="259.0" prefHeight="115.0" prefWidth="422.0" promptText="Digite aqui uma observação sobre o Aluno" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </TextArea>
-      <ComboBox fx:id="cai_sexo" layoutX="282.0" layoutY="143.0" prefHeight="30.0" prefWidth="135.0" promptText="Selecione" AnchorPane.rightAnchor="15.0" />
-      <Label layoutX="301.0" layoutY="127.0" prefHeight="16.0" prefWidth="135.0" text="Sexo">
+      <ComboBox fx:id="cai_sexo" layoutX="302.0" layoutY="202.0" prefHeight="30.0" prefWidth="135.0" promptText="Selecione" AnchorPane.rightAnchor="14.800000000000011" />
+      <Label layoutX="301.0" layoutY="186.0" prefHeight="16.0" prefWidth="135.0" text="Sexo">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
+      <TextField fx:id="tex_whatsapp" layoutX="158.0" layoutY="86.0" prefHeight="30.0" prefWidth="135.0" promptText="(00) 00000-0000">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="158.0" layoutY="70.0" prefHeight="16.0" prefWidth="135.0" text="WhatsApp">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="158.0" layoutY="128.0" prefHeight="16.0" prefWidth="135.0" text="Dia Pre. Pagamento">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tex_diaPrePagamento" layoutX="158.0" layoutY="144.0" prefHeight="30.0" prefWidth="135.0" promptText="0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

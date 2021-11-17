@@ -9,14 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.AlunoVisualizarControle">
+<AnchorPane prefHeight="447.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.AlunoVisualizarControle">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="447.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Dados Usuário">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
                      <children>
                         <Label layoutX="32.0" layoutY="27.0" prefHeight="18.0" prefWidth="428.0" text="Nome" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
                            <font>
@@ -54,7 +53,7 @@
                               <Font name="Arial" size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tex_telefone" editable="false" layoutX="300.0" layoutY="93.0" prefHeight="30.0" prefWidth="135.0">
+                        <TextField fx:id="tex_telefone" editable="false" layoutX="15.0" layoutY="152.0" prefHeight="30.0" prefWidth="135.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -62,7 +61,7 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </TextField>
-                        <Label layoutX="300.0" layoutY="75.0" prefHeight="18.0" prefWidth="135.0" text="Telefone">
+                        <Label layoutX="15.0" layoutY="134.0" prefHeight="18.0" prefWidth="135.0" text="Telefone">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -80,7 +79,7 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </TextField>
-                        <TextField fx:id="tex_email" editable="false" layoutX="15.0" layoutY="157.0" prefHeight="30.0" prefWidth="540.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                        <TextField fx:id="tex_email" editable="false" layoutX="15.0" layoutY="210.0" prefHeight="30.0" prefWidth="540.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -88,17 +87,17 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </TextField>
-                        <Label layoutX="15.0" layoutY="139.0" prefHeight="18.0" prefWidth="428.0" text="E-mail" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                        <Label layoutX="15.0" layoutY="192.0" prefHeight="18.0" prefWidth="428.0" text="E-mail" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </Label>
-                        <Label layoutX="15.0" layoutY="200.0" prefHeight="18.0" prefWidth="428.0" text="Observações" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                        <Label layoutX="15.0" layoutY="250.0" prefHeight="18.0" prefWidth="428.0" text="Observações" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="tex_observacoes" editable="false" layoutX="15.0" layoutY="218.0" prefHeight="130.0" prefWidth="570.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="218.0">
+                        <TextArea fx:id="tex_observacoes" editable="false" layoutX="15.0" layoutY="269.0" prefHeight="134.0" prefWidth="570.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="269.0">
                            <cursor>
                               <Cursor fx:constant="DISAPPEAR" />
                            </cursor>
@@ -119,6 +118,32 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </TextField>
+                        <Label layoutX="300.0" layoutY="75.0" prefHeight="18.0" prefWidth="135.0" text="Dia Pre. Pagamento">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tex_diaPrePagamento" editable="false" layoutX="300.0" layoutY="93.0" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="tex_whatsapp" editable="false" layoutX="159.0" layoutY="152.0" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="159.0" layoutY="134.0" prefHeight="18.0" prefWidth="135.0" text="WhatsApp">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>

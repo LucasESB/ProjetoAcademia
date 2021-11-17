@@ -262,7 +262,6 @@ public class MySql {
      * @throws java.sql.SQLException
      */
     public boolean executeUpdate(String SQL, Object... valores) throws SQLException {
-        try {
             if (connect()) {
                 preparedStatement = getPrepareStatement(SQL);
 
@@ -280,10 +279,6 @@ public class MySql {
             }
 
             return false;
-        }
-        catch (SQLException ex) {
-            throw new SQLException(ex);
-        }
     }
 
     /**

@@ -98,6 +98,8 @@ public class AlunosDao {
             alunos.getDataNascimento(),
             alunos.getDataCadastro(),
             alunos.getObservacao(),
+            alunos.getWhatsapp(),
+            alunos.getDiaPrePagamento()
         };
 
         return db.getGenerateKey(Sql.ALUNOS_INSERT, dados);
@@ -124,6 +126,8 @@ public class AlunosDao {
             alunos.getDataNascimento(),
             alunos.getDataCadastro(),
             alunos.getObservacao(),
+            alunos.getWhatsapp(),
+            alunos.getDiaPrePagamento(),
             alunos.getId()
         };
 
@@ -164,6 +168,8 @@ public class AlunosDao {
         aluno.setDataNascimento(resultSet.getDate("datanascimento"));
         aluno.setDataCadastro(resultSet.getDate("datacadastro"));
         aluno.setObservacao(resultSet.getString("observacao"));
+        aluno.setWhatsapp(resultSet.getString("whatsapp"));
+        aluno.setDiaPrePagamento(resultSet.getInt("diaPrePagamento"));
 
         return aluno;
     }

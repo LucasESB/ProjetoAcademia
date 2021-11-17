@@ -1,5 +1,7 @@
 package academia.bean;
 
+import java.util.ArrayList;
+
 public class FormaPagamentoBean {
     public static final String DINEHIRO = "1";
     public static final String PIX = "2";
@@ -49,8 +51,22 @@ public class FormaPagamentoBean {
                 descricao = "Cartão de Debito";
                 break;
         }
-        
+
         return descricao;
     }
 
+    public static ArrayList<FormaPagamentoBean> getListFormasPagamento() {
+        ArrayList<FormaPagamentoBean> list = new ArrayList<>();
+        list.add(new FormaPagamentoBean(DINEHIRO));
+        list.add(new FormaPagamentoBean(PIX));
+        list.add(new FormaPagamentoBean(TRASNFERENCIA));
+        list.add(new FormaPagamentoBean(CARTAO_CREDITO));
+        list.add(new FormaPagamentoBean(CARTAO_DEBITO));
+        return list;
+    }
+
+    @Override
+    public String toString() {
+        return getDescricao();
+    }
 }

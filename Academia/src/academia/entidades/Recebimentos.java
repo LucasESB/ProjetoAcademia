@@ -482,7 +482,7 @@ public class Recebimentos {
     }
 
     /**
-     * * Informa se o recebimento é da maatriculo
+     * Informa se o recebimento é da maatriculo
      *
      * <br> Tipo BD....: TINYINT
      * <br> Obrigatorio: true

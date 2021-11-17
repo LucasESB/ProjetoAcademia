@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AlunoBuscaControle implements Initializable {
@@ -67,7 +69,7 @@ public class AlunoBuscaControle implements Initializable {
     /**
      * Armazena o objeto usuario que será retornado da tela
      */
-    private Alunos objetoRetorno;
+    private List<Alunos> objetoRetorno;
 
     private ObservableList<Alunos> observableListAlunos;
 
@@ -75,14 +77,21 @@ public class AlunoBuscaControle implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         col_nome.setCellValueFactory(new PropertyValueFactory<Alunos, String>("nome"));
         col_cpf.setCellValueFactory(new PropertyValueFactory<Alunos, String>("cpfFormatado"));
+        tab_alunos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public static Alunos showDialogBusca() throws Exception {
         AlunoBuscaControle.abrirTela();
+        return instancia.getObjetoRetorno() == null || instancia.getObjetoRetorno().isEmpty()
+                ? null : instancia.getObjetoRetorno().get(0);
+    }
+
+    public static List<Alunos> showDialogBuscaListAlunos() throws Exception {
+        AlunoBuscaControle.abrirTela();
         return instancia.getObjetoRetorno();
     }
 
-    public Alunos getObjetoRetorno() {
+    public List<Alunos> getObjetoRetorno() {
         return objetoRetorno;
     }
 
@@ -165,12 +174,18 @@ public class AlunoBuscaControle implements Initializable {
     }
 
     private void selecionarAluno() {
-        objetoRetorno = tab_alunos.getSelectionModel().getSelectedItem();
+        ObservableList<Alunos> observableList = tab_alunos.getSelectionModel().getSelectedItems();
 
-        if (objetoRetorno == null) {
+        if (observableList == null || observableList.isEmpty()) {
             alertaSelecioneUmRegistro();
             return;
         }
+
+        List<Alunos> list = new ArrayList<>();
+        for (Alunos alunos : observableList) {
+            list.add(alunos);
+        }
+        objetoRetorno = list;
 
         janela.close();
     }

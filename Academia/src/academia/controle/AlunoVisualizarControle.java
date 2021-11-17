@@ -31,6 +31,9 @@ public class AlunoVisualizarControle implements Initializable {
     private TextField tex_dataNascimento;
 
     @FXML
+    private TextField tex_diaPrePagamento;
+
+    @FXML
     private TextField tex_email;
 
     @FXML
@@ -44,6 +47,9 @@ public class AlunoVisualizarControle implements Initializable {
 
     @FXML
     private TextField tex_telefone;
+
+    @FXML
+    private TextField tex_whatsapp;
 
     /**
      * Instancia da janela
@@ -68,9 +74,11 @@ public class AlunoVisualizarControle implements Initializable {
     private void setDados() {
         tex_nome.setText(aluno.getNome());
         tex_dataCadastro.setText(DataHora.formatarData(aluno.getDataCadastro(), "dd/MM/yyyy"));
+        tex_diaPrePagamento.setText(Integer.toString(aluno.getDiaPrePagamento()));
         tex_cpf.setText(Textos.formatarCPF(aluno.getCpf()));
         tex_dataNascimento.setText(DataHora.formatarData(aluno.getDataNascimento(), "dd/MM/yyyy"));
         tex_telefone.setText(Textos.formatarTelefone(aluno.getTelefone()));
+        tex_whatsapp.setText(Textos.formatarTelefone(aluno.getWhatsapp()));
         tex_sexo.setText(aluno.getSexoDescricao());
         tex_email.setText(aluno.getEmail());
         tex_observacoes.setText(aluno.getObservacao());

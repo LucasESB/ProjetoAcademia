@@ -37,6 +37,24 @@
                   <Insets left="4.0" />
                </VBox.margin>
                   </Button>
+            <Button fx:id="bot_menuItemTurmas" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="204.0" stylesheets="@../assets/css/style.css" text="Turmas" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Button>
                   <Button fx:id="bot_menuItemAlunos" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="204.0" stylesheets="@../assets/css/style.css" text="Alunos" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">

@@ -98,6 +98,26 @@ public class Alunos {
      */
     private String observacao;
 
+    /**
+     * Informa o telefone do whatsapp do aluno
+     *
+     * <br> Tipo BD....: VARCHAR
+     * <br> Obrigatorio: false
+     * <br> Tamanho....: 11
+     * <br> Enum.......: -
+     */
+    private String whatsapp;
+
+    /**
+     * Informa o dia de preferência do pagamento da mensalidade
+     *
+     * <br> Tipo BD....: TINYNT
+     * <br> Obrigatorio: true
+     * <br> Tamanho....: -
+     * <br> Enum.......: -
+     */
+    private int diaPrePagamento;
+
     public Alunos() {
     }
 
@@ -378,5 +398,61 @@ public class Alunos {
      */
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    /**
+     * * Informa o telefone do whatsapp do aluno
+     *
+     * <br> Tipo BD....: VARCHAR
+     * <br> Obrigatorio: false
+     * <br> Tamanho....: 11
+     * <br> Enum.......: -
+     *
+     * @return
+     */
+    public String getWhatsapp() {
+        return whatsapp;
+    }
+
+    /**
+     * * Informa o telefone do whatsapp do aluno
+     *
+     * <br> Tipo BD....: VARCHAR
+     * <br> Obrigatorio: false
+     * <br> Tamanho....: 11
+     * <br> Enum.......: -
+     *
+     * @param whatsapp
+     */
+    public void setWhatsapp(String whatsapp) {
+        this.whatsapp = whatsapp;
+    }
+
+    /**
+     * Informa o dia de preferência do pagamento da mensalidade
+     *
+     * <br> Tipo BD....: TINYNT
+     * <br> Obrigatorio: true
+     * <br> Tamanho....: -
+     * <br> Enum.......: -
+     *
+     * @return
+     */
+    public int getDiaPrePagamento() {
+        return diaPrePagamento;
+    }
+
+    /**
+     * Informa o dia de preferência do pagamento da mensalidade
+     *
+     * <br> Tipo BD....: TINYNT
+     * <br> Obrigatorio: true
+     * <br> Tamanho....: -
+     * <br> Enum.......: -
+     *
+     * @param diaPrePagamento
+     */
+    public void setDiaPrePagamento(int diaPrePagamento) {
+        this.diaPrePagamento = diaPrePagamento;
     }
 }

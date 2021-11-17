@@ -20,20 +20,21 @@ INSERT IGNORE INTO usuarios (login, nome, senha, admin) VALUES ('Master', 'MASTE
 
 DROP TABLE IF EXISTS alunos;
 CREATE TABLE IF NOT EXISTS alunos (
-	id 				MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial do aluno',
-    nome 			VARCHAR(40) NOT NULL COMMENT 'Informa o nome do aluno',
-    telefone		VARCHAR(11) NOT NULL COMMENT 'Informa o telefone do aluno',
-    email			VARCHAR(60) NULL COMMENT 'Informa o email do aluno',
-    cpf				CHAR(11) NOT NULL COMMENT 'Informa o cpf do aluno',
-    sexo			ENUM ('M','F') NOT NULL COMMENT 'Informa o sexo do aluno M - Masculino F - Feminino',
-    datanascimento 	DATETIME NOT NULL COMMENT 'Informa a data de nascimento do aluno',
-    datacadastro 	DATETIME NOT NULL COMMENT 'Informa a data em que o aluno em questão foi cadastrado',
-    observacao		TEXT NULL COMMENT 'Informa uma observação sobre o aluno',
+	id 					MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial do aluno',
+    nome 				VARCHAR(40) NOT NULL COMMENT 'Informa o nome do aluno',
+    telefone			VARCHAR(11) NOT NULL COMMENT 'Informa o telefone do aluno',
+    whatsapp			VARCHAR(11) NULL COMMENT 'Informa o telefone do whatsapp do aluno',
+    email				VARCHAR(60) NULL COMMENT 'Informa o email do aluno',
+    cpf					CHAR(11) NOT NULL COMMENT 'Informa o cpf do aluno',
+    sexo				ENUM ('M','F') NOT NULL COMMENT 'Informa o sexo do aluno M - Masculino F - Feminino',
+    datanascimento 		DATETIME NOT NULL COMMENT 'Informa a data de nascimento do aluno',
+    datacadastro 		DATETIME NOT NULL COMMENT 'Informa a data em que o aluno em questão foi cadastrado',
+    diaPrePagamento 	TINYINT UNSIGNED NOT NULL COMMENT 'Informa o dia de preferência do pagamento da mensalidade',
+    observacao			TEXT NULL COMMENT 'Informa uma observação sobre o aluno',
     KEY idx_id (id),
     PRIMARY KEY (id)
-);
+) COMMENT 'Armazena os alunos do sistema';
 
-/*excluido, usuarioEdicao, dataEdicao */
 DROP TABLE IF EXISTS recebimentos;
 CREATE TABLE IF NOT EXISTS recebimentos (
 	id 					MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial do recebimento',
@@ -58,4 +59,27 @@ CREATE TABLE IF NOT EXISTS recebimentos (
     KEY idx_dataVencimento (dataVencimento),
     KEY idx_dataPagamento (dataPagamento),
     PRIMARY KEY (id)
-);
+) COMMENT 'Armazena os recebimentos realizados';
+
+DROP TABLE IF EXISTS turmas;
+CREATE TABLE IF NOT EXISTS turmas (
+	id 				MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial da turma',
+    descricao 		VARCHAR(40) NOT NULL COMMENT 'Informa a descrição da turma',
+    vMensalidade	DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor do recebimento',
+    KEY idx_id (id),
+    PRIMARY KEY (id)
+) COMMENT 'Armazena as turmas do sistema';
+
+DROP TABLE IF EXISTS turmasAlunos;
+CREATE TABLE IF NOT EXISTS turmasAlunos (
+	turma_id 		MEDIUMINT UNSIGNED NOT NULL COMMENT 'Armazena o codigo sequencial da turma',
+    aluno_id 		MEDIUMINT UNSIGNED  NOT NULL COMMENT 'Informa a descrição da turma',
+    KEY idx_turma_id (turma_id),
+    KEY idx_aluno_id (aluno_id),
+    PRIMARY KEY (turma_id, aluno_id),
+    CONSTRAINT fk_turmasAlunos_turma FOREIGN KEY (turma_id) REFERENCES turmas (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_turmasAlunos_aluno FOREIGN KEY (aluno_id) REFERENCES alunos (id) ON UPDATE CASCADE ON DELETE CASCADE
+) COMMENT 'Armazena as turmas do sistema';
+
+
+

@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -44,6 +45,9 @@ public class AlunosInserirEditarControle implements Initializable {
     private DatePicker dat_dataNascimento;
 
     @FXML
+    private TextField tex_diaPrePagamento;
+
+    @FXML
     private TextField tex_email;
 
     @FXML
@@ -54,6 +58,9 @@ public class AlunosInserirEditarControle implements Initializable {
 
     @FXML
     private TextField tex_telefone;
+
+    @FXML
+    private TextField tex_whatsapp;
 
     /**
      * Objeto de conexão com a tabela aluno
@@ -113,6 +120,7 @@ public class AlunosInserirEditarControle implements Initializable {
     private void setMascaras() {
         Mascaras.mascararCPF(tex_cpf);
         Mascaras.mascararTelefone(tex_telefone);
+        Mascaras.mascararTelefone(tex_whatsapp);
         Mascaras.mascararData(dat_dataNascimento);
         Mascaras.maxField(tex_email, 60);
         Mascaras.maxField(tex_nome, 40);
@@ -125,9 +133,11 @@ public class AlunosInserirEditarControle implements Initializable {
     private void setDados() {
         tex_nome.setText(alunoEdit.getNome());
         tex_cpf.setText(Textos.formatarCPF(alunoEdit.getCpf()));
-        dat_dataNascimento.setValue(LocalDate.parse(alunoEdit.getDataNascimento().toString()));
+        dat_dataNascimento.setValue(LocalDate.parse(DataHora.formatarData(alunoEdit.getDataNascimento(), "yyyy-MM-dd"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        tex_diaPrePagamento.setText(Integer.toString(alunoEdit.getDiaPrePagamento()));
         cai_sexo.getSelectionModel().select(alunoEdit.getSexo().equalsIgnoreCase("F") ? 0 : 1);
         tex_telefone.setText(Textos.formatarTelefone(alunoEdit.getTelefone()));
+        tex_whatsapp.setText(Textos.formatarTelefone(alunoEdit.getWhatsapp()));
         tex_email.setText(alunoEdit.getEmail());
         tex_observacoes.setText(alunoEdit.getObservacao() == null ? "" : alunoEdit.getObservacao());
     }
@@ -182,6 +192,12 @@ public class AlunosInserirEditarControle implements Initializable {
             mensagensErro.append("Data de Nascimento é de preenchimento obrigatório.\n");
         }
 
+        if (tex_diaPrePagamento.getText() == null || tex_diaPrePagamento.getText().isEmpty()) {
+            mensagensErro.append("Dia Pre. Pagamento é de preenchimento obrigatório.\n");
+        } else if (Integer.parseInt(tex_diaPrePagamento.getText()) <= 0 || Integer.parseInt(tex_diaPrePagamento.getText()) > 30) {
+            mensagensErro.append("O campo Dia Pre. Pagamento está preenchido com um valor invalido, inseria um valor entre 1 e 30 .\n");
+        }
+
         if (tex_telefone.getText() == null || tex_telefone.getText().isEmpty()) {
             mensagensErro.append("Telefone é de preenchimento obrigatório.\n");
         }
@@ -233,9 +249,16 @@ public class AlunosInserirEditarControle implements Initializable {
                 .replace("-", ""));
 
         aluno.setDataNascimento(DataHora.stringParseDate(dat_dataNascimento.getEditor().getText(), "dd/MM/yyyy"));
+        aluno.setDiaPrePagamento(Integer.parseInt(tex_diaPrePagamento.getText()));
         aluno.setDataCadastro(new Date());
 
         aluno.setTelefone(tex_telefone.getText()
+                .replace("(", "")
+                .replace(")", "")
+                .replace(" ", "")
+                .replace("-", ""));
+
+        aluno.setWhatsapp(tex_whatsapp.getText()
                 .replace("(", "")
                 .replace(")", "")
                 .replace(" ", "")

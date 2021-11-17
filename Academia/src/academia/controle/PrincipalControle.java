@@ -39,6 +39,9 @@ public class PrincipalControle implements Initializable {
     private Button bot_menuItemSair;
 
     @FXML
+    private Button bot_menuItemTurmas;
+
+    @FXML
     private Button bot_menuItemUsuarios;
 
     /**
@@ -63,6 +66,7 @@ public class PrincipalControle implements Initializable {
 
     private void setEventos() {
         bot_menuItemHome.setOnAction(eventHandlerAction);
+        bot_menuItemTurmas.setOnAction(eventHandlerAction);
         bot_menuItemAlunos.setOnAction(eventHandlerAction);
         bot_menuItemRecebimentos.setOnAction(eventHandlerAction);
         bot_menuItemFinanceiro.setOnAction(eventHandlerAction);
@@ -79,6 +83,8 @@ public class PrincipalControle implements Initializable {
             try {
                 if (event.getSource().equals(bot_menuItemHome)) {
                     abrirTelaHome();
+                } else if (event.getSource().equals(bot_menuItemTurmas)) {
+                    abrirTelaTurmas();
                 } else if (event.getSource().equals(bot_menuItemAlunos)) {
                     abrirTelaAlunos();
                 } else if (event.getSource().equals(bot_menuItemRecebimentos)) {
@@ -102,8 +108,14 @@ public class PrincipalControle implements Initializable {
         areaVisualizacao.getChildren().setAll(a);
     }
 
+    private void abrirTelaTurmas() throws IOException {
+        addERemoveBordaArrendodaBotao(bot_menuItemTurmas);
+        BorderPane a = (BorderPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Turmas.fxml")));
+        areaVisualizacao.getChildren().setAll(a);
+    }
     private void addERemoveBordaArrendodaBotao(Button botao) {
         bot_menuItemHome.setStyle(null);
+        bot_menuItemTurmas.setStyle(null);
         bot_menuItemAlunos.setStyle(null);
         bot_menuItemRecebimentos.setStyle(null);
         bot_menuItemFinanceiro.setStyle(null);
