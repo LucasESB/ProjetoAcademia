@@ -9,7 +9,7 @@ public class Sql {
 
     //Recebimentos
     public static final String RECEBIMENTOS_INSERT = "INSERT INTO recebimentos (aluno_id, aluno_nome, usuario_id, usuario_nome, dataVencimento, dataPagamento, formaPagamento, vRecebimento, vDesconto, vTotal, matricula, excluido) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-    public static final String RECEBIMENTOS_UPDATE = "UPDATE recebimentos  SET aluno_id=?, aluno_nome=?, usuario_id=?, usuario_nome=?, dataVencimento=?, dataPagamento=?, formaPagamento=?, vRecebimento=?, vDesconto=?, vTotal=?, matricula=? WHERE id=?";
+    public static final String RECEBIMENTOS_UPDATE = "UPDATE recebimentos  SET usuarioEdicao_id=?, usuarioEdicao_nome=?, dataVencimento=?, dataPagamento=?, dataEdicao=?, formaPagamento=?, matricula=? WHERE id=?";
     public static final String RECEBIMENTOS_APAGAR = "UPDATE recebimentos  SET excluido=true WHERE id=?";
     public static final String RECEBIMENTOS_SELCT_ALL = "SELECT * FROM recebimentos";
 

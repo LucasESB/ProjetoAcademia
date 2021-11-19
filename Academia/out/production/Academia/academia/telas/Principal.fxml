@@ -54,6 +54,9 @@
                <padding>
                   <Insets left="30.0" />
                </padding>
+               <VBox.margin>
+                  <Insets left="4.0" />
+               </VBox.margin>
             </Button>
                   <Button fx:id="bot_menuItemAlunos" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="204.0" stylesheets="@../assets/css/style.css" text="Alunos" textFill="WHITE">
                      <graphic>
@@ -169,12 +172,7 @@
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="800.0" style="-fx-background-color: #0598FF;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" text="Logo" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Nome Projeto" textFill="WHITE">
+                  <Label text="UpFit Sistema" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -189,7 +187,7 @@
                   </Label>
                </children>
                <padding>
-                  <Insets left="42.0" />
+                  <Insets left="20.0" />
                </padding>
             </HBox>
          </top>

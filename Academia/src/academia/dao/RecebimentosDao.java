@@ -123,16 +123,12 @@ public class RecebimentosDao {
      */
     public boolean atualizar(Recebimentos recebimento) throws SQLException {
         Object[] dados = new Object[]{
-                recebimento.getAluno().getId(),
-                recebimento.getAluno().getNome(),
-                recebimento.getUsuario().getId(),
-                recebimento.getUsuario().getNome(),
+                recebimento.getUsuarioEdicao().getId(),
+                recebimento.getUsuarioEdicao().getNome(),
                 recebimento.getDataVencimento(),
                 recebimento.getDataPagamento(),
+                recebimento.getDataEdicao(),
                 recebimento.getFormaPagamento().getCodigo(),
-                recebimento.getvRecebimento(),
-                recebimento.getvDesconto(),
-                recebimento.getvTotal(),
                 recebimento.isMatricula(),
                 recebimento.getId()
         };

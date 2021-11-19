@@ -3,8 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,8 +20,46 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="445.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.RecebimentosControle">
       <BorderPane prefHeight="445.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
-            <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="656.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="656.0" BorderPane.alignment="CENTER">
                <children>
+               <GridPane prefHeight="80.0" prefWidth="186.0">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0000244140625" minWidth="10.0" prefWidth="94.6000244140625" />
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.20001220703125" minWidth="10.0" prefWidth="91.3999755859375" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints maxHeight="35.599951171875" minHeight="10.0" prefHeight="35.599951171875" valignment="BOTTOM" vgrow="SOMETIMES" />
+                   <RowConstraints maxHeight="51.60001220703125" minHeight="10.0" prefHeight="45.200048828125" valignment="TOP" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <TextField fx:id="tex_vRecebidos" alignment="CENTER_RIGHT" editable="false" prefHeight="30.0" prefWidth="94.0" promptText="0,00" GridPane.rowIndex="1">
+                        <font>
+                           <Font name="Arial" size="13.0" />
+                        </font>
+                        <GridPane.margin>
+                           <Insets right="5.0" />
+                        </GridPane.margin>
+                     </TextField>
+                     <TextField fx:id="tex_vAreceber" alignment="CENTER_RIGHT" editable="false" prefHeight="30.0" prefWidth="94.0" promptText="0,00" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <font>
+                           <Font name="Arial" size="13.0" />
+                        </font>
+                     </TextField>
+                     <Label text="Recebidos">
+                        <font>
+                           <Font name="Arial Bold" size="13.0" />
+                        </font>
+                     </Label>
+                     <Label text="A Receber" GridPane.columnIndex="1">
+                        <font>
+                           <Font name="Arial Bold" size="13.0" />
+                        </font>
+                     </Label>
+                  </children>
+                  <HBox.margin>
+                     <Insets right="128.0" />
+                  </HBox.margin>
+               </GridPane>
                   <Button fx:id="bot_inserir" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Inserir">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -35,7 +75,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets right="5.0" />
+                        <Insets right="5.0" top="20.0" />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="bot_editar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Editar">
@@ -53,7 +93,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets right="5.0" />
+                        <Insets right="5.0" top="20.0" />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="bot_excluir" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Excluir">
@@ -70,6 +110,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                  <HBox.margin>
+                     <Insets top="20.0" />
+                  </HBox.margin>
                   </Button>
                </children>
                <padding>
@@ -77,29 +120,38 @@
                </padding>
             </HBox>
          </bottom>
-         <top>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </top>
          <center>
             <TableView fx:id="tab_recebimentos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="col_datPagamento" prefWidth="75.0" text="Dat. Pagamento" />
+                <TableColumn fx:id="col_datVencimento" prefWidth="75.0" text="Dat. Vencimento" />
+               <TableColumn fx:id="col_aluno" prefWidth="105.59996032714844" text="Aluno" />
+               <TableColumn fx:id="col_vMensalidade" prefWidth="88.79998779296875" text="Vl. Mensalidade" />
+               <TableColumn fx:id="col_vDesconto" prefWidth="76.0" text="Vl. Desconto" />
+               <TableColumn fx:id="col_vTotal" prefWidth="75.20001220703125" text="Vl. Total" />
+               <TableColumn fx:id="col_usuarioRecebimento" prefWidth="131.99993896484375" text="Usuário Rec." />
               </columns>
                <BorderPane.margin>
                   <Insets left="15.0" right="15.0" />
                </BorderPane.margin>
             </TableView>
          </center>
+      <top>
+         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="656.0" BorderPane.alignment="CENTER">
+            <children>
+               <Label text="Recebimentos Referente ao Mês Atual">
+                  <font>
+                     <Font name="Arial Bold" size="14.0" />
+                  </font>
+               </Label>
+            </children>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+            <padding>
+               <Insets left="15.0" />
+            </padding>
+         </HBox>
+      </top>
       </BorderPane>
 </AnchorPane>
