@@ -2,19 +2,18 @@ package academia.controle;
 
 import academia.dao.RecebimentosDao;
 import academia.entidades.Recebimentos;
+import academia.utilitarios.DataHora;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,7 +29,37 @@ public class RecebimentosControle implements Initializable {
     private Button bot_inserir;
 
     @FXML
+    private Button bot_pesquisar;
+
+    @FXML
+    private TableColumn<Recebimentos, String> col_aluno;
+
+    @FXML
+    private TableColumn<Recebimentos, String> col_datPagamento;
+
+    @FXML
+    private TableColumn<Recebimentos, String> col_datVencimento;
+
+    @FXML
+    private TableColumn<Recebimentos, String> col_usuarioRecebimento;
+
+    @FXML
+    private TableColumn<Recebimentos, String> col_vDesconto;
+
+    @FXML
+    private TableColumn<Recebimentos, String> col_vMensalidade;
+
+    @FXML
+    private TableColumn<Recebimentos, String> col_vTotal;
+
+    @FXML
     private TableView<Recebimentos> tab_recebimentos;
+
+    @FXML
+    private TextField tex_vAreceber;
+
+    @FXML
+    private TextField tex_vRecebidos;
 
     /**
      * Objeto de conexão com a tabela recebimentos
@@ -46,10 +75,12 @@ public class RecebimentosControle implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         setEventos();
     }
 
     private void setEventos() {
+        bot_pesquisar.setOnAction(eventHandlerAction);
         bot_inserir.setOnAction(eventHandlerAction);
         bot_editar.setOnAction(eventHandlerAction);
         bot_excluir.setOnAction(eventHandlerAction);
@@ -62,7 +93,9 @@ public class RecebimentosControle implements Initializable {
         @Override
         public void handle(ActionEvent event) {
             try {
-                if (event.getSource().equals(bot_inserir)) {
+                if (event.getSource().equals(bot_pesquisar)) {
+                    pesquisar();
+                } else if (event.getSource().equals(bot_inserir)) {
                     inserir();
                 } else if (event.getSource().equals(bot_editar)) {
                     editar();
@@ -74,6 +107,12 @@ public class RecebimentosControle implements Initializable {
             }
         }
     };
+
+    private void pesquisar() throws Exception {
+        String data = DataHora.formatarData(new Date(), "yyyy-MM-dd");
+        String sql = "WHERE dataPagamento >= '" + data + " 00:00:00' AND dataPagamento <= '" + data + " 23:59:59'";
+        tab_recebimentos.setItems(FXCollections.observableList(recebimentoDao.getRecebimentos(sql)));
+    }
 
     private void inserir() throws Exception {
         Recebimentos recebimento = RecebimentosInserirEditarControle.showDialogInserir();

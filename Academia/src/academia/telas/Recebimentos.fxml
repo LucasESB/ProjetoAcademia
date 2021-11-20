@@ -144,6 +144,28 @@
                      <Font name="Arial Bold" size="14.0" />
                   </font>
                </Label>
+               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="385.0">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets right="15.0" />
+                  </padding>
+                  <children>
+                     <Button fx:id="bot_pesquisar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #58BAFF;" text="Pesquisar" textFill="WHITE">
+                        <font>
+                           <Font name="Arial" size="13.0" />
+                        </font>
+                        <graphic>
+                           <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../assets/icons/lupa.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </children>
+               </HBox>
             </children>
             <BorderPane.margin>
                <Insets />
