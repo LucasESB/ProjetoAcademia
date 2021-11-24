@@ -3,21 +3,26 @@ package academia.controle;
 import academia.dao.RecebimentosDao;
 import academia.entidades.Recebimentos;
 import academia.utilitarios.DataHora;
+import academia.utilitarios.Decimal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RecebimentosControle implements Initializable {
+
+    @FXML
+    private Button bot_aReceber;
 
     @FXML
     private Button bot_editar;
@@ -61,6 +66,7 @@ public class RecebimentosControle implements Initializable {
     @FXML
     private TextField tex_vRecebidos;
 
+    public static AnchorPane janela;
     /**
      * Objeto de conexão com a tabela recebimentos
      */
@@ -75,7 +81,13 @@ public class RecebimentosControle implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        col_aluno.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("nomeAluno"));
+        col_datPagamento.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("dataPagamentoFormatado"));
+        col_datVencimento.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("dataVencimentoFormatado"));
+        col_usuarioRecebimento.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("nomeUsuario"));
+        col_vDesconto.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("vDescontoFormatado"));
+        col_vMensalidade.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("vRecebimentoFormatado"));
+        col_vTotal.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("vTotalFormatado"));
         setEventos();
     }
 
@@ -84,6 +96,7 @@ public class RecebimentosControle implements Initializable {
         bot_inserir.setOnAction(eventHandlerAction);
         bot_editar.setOnAction(eventHandlerAction);
         bot_excluir.setOnAction(eventHandlerAction);
+        bot_aReceber.setOnAction(eventHandlerAction);
     }
 
     /**
@@ -101,6 +114,8 @@ public class RecebimentosControle implements Initializable {
                     editar();
                 } else if (event.getSource().equals(bot_excluir)) {
                     excluir();
+                } else if (event.getSource().equals(bot_aReceber)) {
+                    aReceber();
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -109,31 +124,50 @@ public class RecebimentosControle implements Initializable {
     };
 
     private void pesquisar() throws Exception {
-        String data = DataHora.formatarData(new Date(), "yyyy-MM-dd");
-        String sql = "WHERE dataPagamento >= '" + data + " 00:00:00' AND dataPagamento <= '" + data + " 23:59:59'";
-        tab_recebimentos.setItems(FXCollections.observableList(recebimentoDao.getRecebimentos(sql)));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+
+        String data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+        String sql = "WHERE dataPagamento >= '" + data + " 00:00:00' ";
+
+        cal.set(Calendar.DAY_OF_MONTH, DataHora.getUltimoDiaDoMes(cal.getTime()));
+        data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+
+        sql += "AND dataPagamento <= '" + data + " 23:59:59' AND excluido = false";
+
+        observableListRecebimentos = FXCollections.observableList(recebimentoDao.getRecebimentos(sql));
+
+        tab_recebimentos.setItems(observableListRecebimentos);
+        calcularTotais();
     }
 
     private void inserir() throws Exception {
-        Recebimentos recebimento = RecebimentosInserirEditarControle.showDialogInserir();
+        List<Recebimentos> listRecebimentos = RecebimentosInserirEditarControle.showDialogInserir();
 
-        if (recebimento == null) {
+        if (listRecebimentos == null || listRecebimentos.isEmpty()) {
             return;
         }
 
-        addObservableListAlunos(recebimento);
+        addObservableListAlunos(listRecebimentos);
 
         tab_recebimentos.setItems(observableListRecebimentos);
     }
 
-    public void addObservableListAlunos(Recebimentos recebimento) {
+    public void addObservableListAlunos(List<Recebimentos> listRecebimentos) throws Exception {
         if (observableListRecebimentos == null) {
-            List<Recebimentos> list = new ArrayList<>();
-            list.add(recebimento);
-            observableListRecebimentos = FXCollections.observableList(list);
+            observableListRecebimentos = FXCollections.observableList(listRecebimentos);
         } else {
-            observableListRecebimentos.add(recebimento);
+            observableListRecebimentos.addAll(listRecebimentos);
         }
+
+        calcularTotais();
+    }
+
+    private void calcularTotais() throws Exception {
+        double totalRecebido = observableListRecebimentos.stream().mapToDouble(r -> r.getvTotal()).sum();
+        tex_vRecebidos.setText("R$ " + Decimal.formatar(totalRecebido, "#,##0.00"));
+        tex_vAreceber.setText("R$ " + Decimal.formatar(recebimentoDao.getvAReceberDoMes(new Date()), "#,##0.00"));
     }
 
     private void editar() throws Exception {
@@ -146,6 +180,7 @@ public class RecebimentosControle implements Initializable {
 
         RecebimentosInserirEditarControle.showDialogEditar(recebimento);
         tab_recebimentos.refresh();
+        calcularTotais();
     }
 
     private void alertaSelecioneUmRegistro() {
@@ -184,6 +219,7 @@ public class RecebimentosControle implements Initializable {
             if (excluido) {
                 tab_recebimentos.getItems().remove(recebimento);
                 tab_recebimentos.refresh();
+                calcularTotais();
             } else {
                 Alert alertErro = new Alert(Alert.AlertType.ERROR);
                 alertErro.setTitle("Erro");
@@ -192,5 +228,19 @@ public class RecebimentosControle implements Initializable {
                 alertErro.show();
             }
         }
+    }
+
+    private void aReceber() throws Exception {
+        RecebimentosAReceberControle.abrirTela();
+    }
+
+    public static AnchorPane getInstancia() throws IOException {
+        if (janela == null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Objects.requireNonNull(TurmasControle.class.getResource("/academia/telas/Recebimentos.fxml")));
+            janela = (AnchorPane) loader.load();
+        }
+
+        return janela;
     }
 }

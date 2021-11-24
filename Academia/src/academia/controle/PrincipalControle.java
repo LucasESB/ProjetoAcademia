@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PrincipalControle implements Initializable {
@@ -104,14 +103,12 @@ public class PrincipalControle implements Initializable {
 
     private void abrirTelaHome() throws IOException {
         addERemoveBordaArrendodaBotao(bot_menuItemHome);
-        AnchorPane a = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Home.fxml")));
-        areaVisualizacao.getChildren().setAll(a);
+        areaVisualizacao.getChildren().setAll(HomeControle.getInstancia());
     }
 
     private void abrirTelaTurmas() throws IOException {
         addERemoveBordaArrendodaBotao(bot_menuItemTurmas);
-        BorderPane a = (BorderPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Turmas.fxml")));
-        areaVisualizacao.getChildren().setAll(a);
+        areaVisualizacao.getChildren().setAll(TurmasControle.getInstancia());
     }
     private void addERemoveBordaArrendodaBotao(Button botao) {
         bot_menuItemHome.setStyle(null);
@@ -127,27 +124,23 @@ public class PrincipalControle implements Initializable {
 
     private void abrirTelaAlunos() throws IOException {
         addERemoveBordaArrendodaBotao(bot_menuItemAlunos);
-        BorderPane a = (BorderPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Alunos.fxml")));
-        areaVisualizacao.getChildren().setAll(a);
+        areaVisualizacao.getChildren().setAll(AlunosControle.getInstancia());
     }
 
     private void abrirTelaRecebimentos() throws IOException {
         addERemoveBordaArrendodaBotao(bot_menuItemRecebimentos);
-        AnchorPane a = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Recebimentos.fxml")));
-        areaVisualizacao.getChildren().setAll(a);
+        areaVisualizacao.getChildren().setAll(RecebimentosControle.getInstancia());
     }
 
     private void abrirTelaFinanceiro() throws IOException {
         addERemoveBordaArrendodaBotao(bot_menuItemFinanceiro);
         //TODO inplmentar modulo fincanceiro
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Alunos.fxml")));
 //        areaVisualizacao.getChildren().setAll(a);
     }
 
     private void abrirTelaUsuario() throws IOException {
         addERemoveBordaArrendodaBotao(bot_menuItemUsuarios);
-        BorderPane a = (BorderPane) FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/academia/telas/Usuario.fxml")));
-        areaVisualizacao.getChildren().setAll(a);
+        areaVisualizacao.getChildren().setAll(UsuarioControle.getInstancia());
     }
 
     private void sairSistema() throws Exception {

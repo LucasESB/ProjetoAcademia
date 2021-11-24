@@ -8,16 +8,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TurmasControle implements Initializable {
@@ -54,6 +58,8 @@ public class TurmasControle implements Initializable {
 
     @FXML
     private TextField tex_descricao;
+
+    public static BorderPane janela;
 
     /**
      * Objeto de conexão com a tabela usuario
@@ -240,13 +246,13 @@ public class TurmasControle implements Initializable {
 
         List<Alunos> list = AlunoBuscaControle.showDialogBuscaListAlunos();
 
-        if(list == null || list.isEmpty()){
+        if (list == null || list.isEmpty()) {
             return;
         }
 
         boolean retorno = turmasDao.inserirAlunos(turma, list);
 
-        if(!retorno) {
+        if (!retorno) {
             Alert alertErro = new Alert(Alert.AlertType.ERROR);
             alertErro.setTitle("Erro");
             alertErro.setHeaderText("Janela de Erro");
@@ -256,5 +262,15 @@ public class TurmasControle implements Initializable {
         }
 
         TurmaVisualizarControle.abrirTela(turma);
+    }
+
+    public static BorderPane getInstancia() throws IOException {
+        if (janela == null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Objects.requireNonNull(TurmasControle.class.getResource("/academia/telas/Turmas.fxml")));
+            janela = (BorderPane) loader.load();
+        }
+
+        return janela;
     }
 }

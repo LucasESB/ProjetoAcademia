@@ -7,16 +7,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UsuarioControle implements Initializable {
@@ -47,6 +51,7 @@ public class UsuarioControle implements Initializable {
     @FXML
     private TextField tex_nome;
 
+    public static BorderPane janela;
     /**
      * Objeto de conexão com a tabela usuario
      */
@@ -206,5 +211,15 @@ public class UsuarioControle implements Initializable {
                 alertErro.show();
             }
         }
+    }
+
+    public static BorderPane getInstancia() throws IOException {
+        if (janela == null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Objects.requireNonNull(UsuarioControle.class.getResource("/academia/telas/Usuario.fxml")));
+            janela = (BorderPane) loader.load();
+        }
+
+        return janela;
     }
 }

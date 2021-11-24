@@ -9,6 +9,11 @@ public class Decimal {
         return formatacao.format(valor);
     }
 
+    public static double getDoubleAredondado(double valor) {
+        DecimalFormat formatacao = new DecimalFormat("#.##");
+        return valorFormatadoParseDouble(formatacao.format(valor));
+    }
+
     public static double valorFormatadoParseDouble(String valor) {
         String v =  valor
                 .replaceAll("\\.", "")

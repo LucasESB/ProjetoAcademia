@@ -3,13 +3,14 @@ package academia.dao;
 import academia.bean.FormaPagamentoBean;
 import academia.conexao.MySql;
 import academia.conexao.Sql;
-import academia.entidades.Alunos;
-import academia.entidades.Recebimentos;
-import academia.entidades.Usuario;
+import academia.entidades.*;
+import academia.utilitarios.DataHora;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class RecebimentosDao {
     /**
@@ -200,5 +201,67 @@ public class RecebimentosDao {
         recebimento.setExcluido(resultSet.getBoolean("excluido"));
 
         return recebimento;
+    }
+
+    public ArrayList<RecebimentosAReceber> getRecebimentosAReceber(Date periodo) throws SQLException {
+        String sql = "SELECT alunos.id, alunos.nome, alunos.telefone, alunos.whatsapp, alunos.diaPrePagamento, turmas.vMensalidade FROM alunos INNER JOIN turmas INNER JOIN turmasalunos ON (turmasalunos.aluno_id, turmas.id) = (alunos.id, turmasalunos.turma_id) ";
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(periodo);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+
+        String data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+        sql += "WHERE alunos.id NOT IN (SELECT recebimentos.aluno_id FROM recebimentos WHERE dataVencimento >= '" + data + " 00:00:00' ";
+
+        cal.set(Calendar.DAY_OF_MONTH, DataHora.getUltimoDiaDoMes(cal.getTime()));
+        data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+        sql += "AND dataVencimento <= '" + data + " 23:59:59')";
+
+        ResultSet resultSet = db.getResultset(sql);
+        ArrayList<RecebimentosAReceber> list = new ArrayList<>();
+
+        while (resultSet.next()) {
+            list.add(getRecebimentosAReceberPorResultSet(resultSet));
+        }
+
+        return list;
+    }
+
+    private RecebimentosAReceber getRecebimentosAReceberPorResultSet(ResultSet resultSet) throws SQLException {
+        RecebimentosAReceber r = new RecebimentosAReceber();
+        Alunos aluno = new Alunos();
+        aluno.setId(resultSet.getInt("alunos.id"));
+        aluno.setNome(resultSet.getString("alunos.nome"));
+        aluno.setTelefone(resultSet.getString("alunos.telefone"));
+        aluno.setWhatsapp(resultSet.getString("alunos.whatsapp"));
+        aluno.setDiaPrePagamento(resultSet.getInt("alunos.diaPrePagamento"));
+        r.setAluno(aluno);
+
+        Turmas turma = new Turmas();
+        turma.setvMensalidade(resultSet.getDouble("turmas.vMensalidade"));
+        r.setTurma(turma);
+
+        return r;
+    }
+
+    public double getvAReceberDoMes(Date periodo) throws SQLException {
+        String sql = "SELECT SUM(vMensalidade) as 'vMensalidade' FROM alunos INNER JOIN turmas INNER JOIN turmasalunos ON (turmasalunos.aluno_id, turmas.id) = (alunos.id, turmasalunos.turma_id) ";
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(periodo);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+
+        String data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+        sql += "WHERE alunos.id NOT IN (SELECT recebimentos.aluno_id FROM recebimentos WHERE dataVencimento >= '" + data + " 00:00:00' ";
+
+        cal.set(Calendar.DAY_OF_MONTH, DataHora.getUltimoDiaDoMes(cal.getTime()));
+        data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+        sql += "AND dataVencimento <= '" + data + " 23:59:59')";
+
+        ResultSet resultSet = db.getResultset(sql);
+
+        if (resultSet.next()) return resultSet.getDouble("vMensalidade");
+
+        return 0.00;
     }
 }

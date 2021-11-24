@@ -9,6 +9,8 @@ import academia.utilitarios.DataHora;
 import academia.utilitarios.Decimal;
 import academia.utilitarios.InstanciaSistema;
 import academia.utilitarios.Mascaras;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,11 +29,8 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RecebimentosInserirEditarControle implements Initializable {
 
@@ -54,7 +53,25 @@ public class RecebimentosInserirEditarControle implements Initializable {
     private DatePicker dat_dataPagamento;
 
     @FXML
-    private TextField tex_TotalPagar;
+    private Label rot_qtdMensalidade;
+
+    @FXML
+    private Label rot_vDesconto;
+
+    @FXML
+    private Label rot_vMensalidade;
+
+    @FXML
+    private Label rot_vPago;
+
+    @FXML
+    private Label rot_vTotal;
+
+    @FXML
+    private Label rot_vTotalPagar;
+
+    @FXML
+    private Label rot_vTroco;
 
     @FXML
     private TextField tex_aluno;
@@ -63,13 +80,19 @@ public class RecebimentosInserirEditarControle implements Initializable {
     private TextField tex_qtdMensalidade;
 
     @FXML
-    private TextField tex_totalPagamento;
-
-    @FXML
     private TextField tex_vDesconto;
 
     @FXML
+    private TextField tex_vMensalidade;
+
+    @FXML
     private TextField tex_vPago;
+
+    @FXML
+    private TextField tex_vTotal;
+
+    @FXML
+    private TextField tex_vTotalPagar;
 
     @FXML
     private TextField tex_vTroco;
@@ -97,7 +120,7 @@ public class RecebimentosInserirEditarControle implements Initializable {
     /**
      * Armazena o objeto usuario que será retornado da tela
      */
-    private Recebimentos objetoRetorno;
+    private List<Recebimentos> objetoRetorno = new ArrayList<>();
 
     private boolean editar;
 
@@ -111,7 +134,7 @@ public class RecebimentosInserirEditarControle implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public static Recebimentos showDialogInserir() throws Exception {
+    public static List<Recebimentos> showDialogInserir() throws Exception {
         RecebimentosInserirEditarControle.abrirTela(null, false);
         return instancia.getObjetoRetorno();
     }
@@ -120,7 +143,7 @@ public class RecebimentosInserirEditarControle implements Initializable {
         RecebimentosInserirEditarControle.abrirTela(recebimento, true);
     }
 
-    public Recebimentos getObjetoRetorno() {
+    public List<Recebimentos> getObjetoRetorno() {
         return objetoRetorno;
     }
 
@@ -136,6 +159,8 @@ public class RecebimentosInserirEditarControle implements Initializable {
             setDados();
         }
 
+        habilitaCamposPagamento(false);
+
         setEventos();
     }
 
@@ -147,21 +172,31 @@ public class RecebimentosInserirEditarControle implements Initializable {
     private void setMascaras() {
         Mascaras.mascararDinheiro(tex_vPago);
         Mascaras.mascararDinheiro(tex_vDesconto);
+        Mascaras.mascararDinheiro(tex_vMensalidade);
     }
 
     private void setDados() throws Exception {
-        tex_qtdMensalidade.setDisable(true);
         tex_aluno.setDisable(true);
         bot_inserirAluno.setDisable(true);
 
-        tex_totalPagamento.setVisible(false);
+        tex_vMensalidade.setVisible(false);
+        rot_vMensalidade.setVisible(false);
+        tex_qtdMensalidade.setVisible(false);
+        rot_qtdMensalidade.setVisible(false);
+        tex_vTotal.setVisible(false);
+        rot_vTotal.setVisible(false);
         tex_vDesconto.setVisible(false);
-        tex_TotalPagar.setVisible(false);
+        rot_vDesconto.setVisible(false);
+        tex_vTotalPagar.setVisible(false);
+        rot_vTotalPagar.setVisible(false);
         tex_vPago.setVisible(false);
+        rot_vPago.setVisible(false);
         tex_vTroco.setVisible(false);
+        rot_vTroco.setVisible(false);
 
         dat_dataPagamento.getEditor().setText(DataHora.formatarData(recebimentoEdit.getDataPagamento(), "dd/MM/yyyy"));
         chb_matricula.setSelected(recebimentoEdit.isMatricula());
+        tex_aluno.setText(recebimentoEdit.getAluno().getNome());
         selecionarFormaPagamento(recebimentoEdit.getFormaPagamento());
     }
 
@@ -177,14 +212,25 @@ public class RecebimentosInserirEditarControle implements Initializable {
         }
     }
 
+    private void habilitaCamposPagamento(boolean habilita) {
+        tex_vDesconto.setDisable(!habilita);
+        tex_vPago.setDisable(!habilita);
+        tex_vMensalidade.setDisable(!habilita || vMensalidade > 0.00);
+
+    }
+
     private void setEventos() {
         bot_inserirAluno.setOnAction(eventHandlerAction);
         bot_cancelar.setOnAction(eventHandlerAction);
         bot_salvar.setOnAction(eventHandlerAction);
         tex_vDesconto.setOnKeyPressed(eventHandlerKey);
         tex_vPago.setOnKeyPressed(eventHandlerKey);
+        tex_vMensalidade.setOnKeyPressed(eventHandlerKey);
         tex_qtdMensalidade.setOnKeyPressed(eventHandlerKey);
         tex_aluno.setOnMouseClicked(eventHandlerMouse);
+        tex_vMensalidade.focusedProperty().addListener(changeListener);
+        tex_vDesconto.focusedProperty().addListener(changeListener);
+        tex_qtdMensalidade.focusedProperty().addListener(changeListener);
     }
 
     /**
@@ -220,6 +266,9 @@ public class RecebimentosInserirEditarControle implements Initializable {
                     calcularTroco();
                 } else if (keyEvent.getSource().equals(tex_qtdMensalidade)) {
                     calcularTotal();
+                } else if (keyEvent.getSource().equals(tex_vMensalidade)) {
+                    vMensalidade = tex_vMensalidade.getText().isEmpty() ? 0.00 : Decimal.valorFormatadoParseDouble(tex_vMensalidade.getText());
+                    calcularTotal();
                 }
             }
         }
@@ -241,32 +290,49 @@ public class RecebimentosInserirEditarControle implements Initializable {
         }
     };
 
+    ChangeListener changeListener = new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+            if(!newVal) {
+                vMensalidade = tex_vMensalidade.getText().isEmpty() ? 0.00 : Decimal.valorFormatadoParseDouble(tex_vMensalidade.getText());
+                calcularTotal();
+            }
+        }
+    };
+
     private void inserirUmNovoAluno() throws Exception {
         alunoSelecionado = AlunosInserirEditarControle.showDialogInserir();
 
         if (alunoSelecionado == null) {
             tex_aluno.clear();
+            habilitaCamposPagamento(false);
             return;
         }
 
         tex_aluno.setText(alunoSelecionado.getNome());
         getMensalidade();
+        habilitaCamposPagamento(true);
     }
 
     private void buscarAluno() throws Exception {
+        tex_aluno.clear();
+        tex_vMensalidade.clear();
+        tex_vTotalPagar.clear();
+        tex_vTotal.clear();
+        tex_vPago.clear();
+        tex_vTroco.clear();
+        vMensalidade = 0.00;
+
         alunoSelecionado = AlunoBuscaControle.showDialogBusca();
 
         if (alunoSelecionado == null) {
-            tex_aluno.clear();
-            tex_totalPagamento.clear();
-            tex_TotalPagar.clear();
-            vMensalidade = 0.00;
             return;
         }
 
         tex_aluno.setText(alunoSelecionado.getNome());
 
         getMensalidade();
+        habilitaCamposPagamento(true);
     }
 
     private void salvar() throws Exception {
@@ -288,7 +354,7 @@ public class RecebimentosInserirEditarControle implements Initializable {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.set(Calendar.DAY_OF_MONTH, alunoSelecionado.getDiaPrePagamento());
+        cal.set(Calendar.DAY_OF_MONTH, recebimentoEdit.getAluno().getDiaPrePagamento());
         recebimentoEdit.setDataVencimento(cal.getTime());
 
         recebimentoEdit.setUsuarioEdicao(InstanciaSistema.getUsuarioLogado());
@@ -309,20 +375,28 @@ public class RecebimentosInserirEditarControle implements Initializable {
     }
 
     private void inserir() throws Exception {
-        Recebimentos recebimento = getRecebimento();
-        int codigo = recebimentosDao.inserir(getRecebimento());
+        boolean erro = false;
 
-        if (codigo <= 0) {
+        for (Recebimentos recebimento : getRecebimento()) {
+            int codigo = recebimentosDao.inserir(recebimento);
+
+            if (codigo <= 0) {
+                erro = true;
+                continue;
+            }
+
+            recebimento.setId(codigo);
+            objetoRetorno.add(recebimento);
+        }
+
+        if (erro) {
             Alert alertErro = new Alert(Alert.AlertType.ERROR);
             alertErro.setTitle("Erro");
             alertErro.setHeaderText("Janela de Erro");
-            alertErro.setContentText("Erro ao tentar inserir o registro");
+            alertErro.setContentText("Erro ao tentar inserir o registro, verique se os recebimentos foram inseridos corretamente.");
             alertErro.show();
-            return;
         }
 
-        recebimento.setId(codigo);
-        objetoRetorno = recebimento;
         janela.close();
     }
 
@@ -354,14 +428,18 @@ public class RecebimentosInserirEditarControle implements Initializable {
                 mensagensErro.append("Qtd. Mensalidade está com um formato invalido.\n");
             }
 
-            if ((tex_totalPagamento.getText() == null || tex_totalPagamento.getText().isEmpty())
-                    && (tex_vPago.getText() == null || tex_vPago.getText().isEmpty())) {
-                mensagensErro.append("Informe o valor pago.\n");
-            } else if ((!tex_totalPagamento.getText().isEmpty() && !tex_vPago.getText().isEmpty())
-                    && Decimal.valorFormatadoParseDouble(tex_vPago.getText()) < Decimal.valorFormatadoParseDouble(tex_totalPagamento.getText())) {
-                mensagensErro.append("O valor pago informado está invalido.\n");
-            } else if (!tex_vPago.getText().isEmpty() && Decimal.valorFormatadoParseDouble(tex_vPago.getText()) <= 0) {
-                mensagensErro.append("O valor pago informado está invalido.\n");
+            if (alunoSelecionado != null) {
+                if (vMensalidade <= 0.00) {
+                    mensagensErro.append("Informe o Valor da Mensalidade.\n");
+                    tex_vMensalidade.requestFocus();
+                } else if ((vMensalidade > 0.00 && !tex_vPago.getText().isEmpty())
+                        && Decimal.valorFormatadoParseDouble(tex_vPago.getText()) < Decimal.valorFormatadoParseDouble(tex_vTotalPagar.getText())) {
+                    mensagensErro.append("O valor pago informado está invalido.\n");
+                    tex_vPago.requestFocus();
+                } else if (!tex_vPago.getText().isEmpty() && Decimal.valorFormatadoParseDouble(tex_vPago.getText()) <= 0) {
+                    mensagensErro.append("O valor pago informado está invalido.\n");
+                    tex_vPago.requestFocus();
+                }
             }
         }
 
@@ -377,30 +455,50 @@ public class RecebimentosInserirEditarControle implements Initializable {
         return false;
     }
 
-    private Recebimentos getRecebimento() throws ParseException {
+    private List<Recebimentos> getRecebimento() throws Exception {
+        List<Recebimentos> list = new ArrayList<>();
         Recebimentos recebimento = new Recebimentos();
+
         recebimento.setAluno(alunoSelecionado);
         recebimento.setUsuario(InstanciaSistema.getUsuarioLogado());
         recebimento.setDataPagamento(DataHora.stringParseDate(dat_dataPagamento.getEditor().getText(), "dd/MM/yyyy"));
 
+        recebimento.setFormaPagamento(cai_formaPagamento.getSelectionModel().getSelectedItem());
+        recebimento.setMatricula(chb_matricula.isSelected());
+        recebimento.setvRecebimento(vMensalidade);
+
+        int qtd = Integer.parseInt(tex_qtdMensalidade.getText());
+        double vDescontoTotal = Decimal.valorFormatadoParseDouble(tex_vDesconto.getText());
+
+        double vDesconto = 0.00;
+
+        if (!tex_vDesconto.getText().isEmpty()) {
+            vDesconto = Decimal.getDoubleAredondado(vDescontoTotal / qtd);
+        }
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.set(Calendar.DAY_OF_MONTH, alunoSelecionado.getDiaPrePagamento());
-        recebimento.setDataVencimento(cal.getTime());
 
-        recebimento.setFormaPagamento(cai_formaPagamento.getSelectionModel().getSelectedItem());
-        recebimento.setMatricula(chb_matricula.isSelected());
+        for (int i = 0; i < Integer.parseInt(tex_qtdMensalidade.getText()); i++) {
+            Recebimentos rec = recebimento.clone();
 
-        if (tex_totalPagamento.getText().isEmpty()) {
-            recebimento.setvRecebimento(Decimal.valorFormatadoParseDouble(tex_vPago.getText()));
-            recebimento.setvTotal(Decimal.valorFormatadoParseDouble(tex_vPago.getText()));
-        } else {
-            recebimento.setvRecebimento(Decimal.valorFormatadoParseDouble(tex_totalPagamento.getText()));
-            recebimento.setvDesconto(tex_vDesconto.getText().isEmpty() ? 0.00 : Decimal.valorFormatadoParseDouble(tex_vDesconto.getText()));
-            recebimento.setvTotal(recebimento.getvRecebimento() - recebimento.getvDesconto());
+            rec.setvDesconto(vDesconto);
+            rec.setvTotal(rec.getvRecebimento() - rec.getvDesconto());
+
+            if (i != 0) {
+                cal.add(Calendar.MONTH, 1);
+            }
+
+            rec.setDataVencimento(cal.getTime());
+            list.add(rec);
         }
 
-        return recebimento;
+        double diferenca = vDescontoTotal == 0.00 ? 0.00 : (vDescontoTotal - Decimal.getDoubleAredondado(vDesconto * qtd));
+        list.get(0).setvDesconto(Decimal.getDoubleAredondado(list.get(0).getvDesconto() + (diferenca)));
+        list.get(0).setvTotal(list.get(0).getvRecebimento() - list.get(0).getvDesconto());
+
+        return list;
     }
 
     private void getMensalidade() throws SQLException {
@@ -410,6 +508,7 @@ public class RecebimentosInserirEditarControle implements Initializable {
             return;
         }
 
+        tex_vMensalidade.setText("R$ " + Decimal.formatar(vMensalidade, "#,##0.00"));
         tex_qtdMensalidade.setText("1");
         calcularTotal();
     }
@@ -421,14 +520,15 @@ public class RecebimentosInserirEditarControle implements Initializable {
 
         double total = vMensalidade * (Integer.parseInt(tex_qtdMensalidade.getText()));
 
-        tex_totalPagamento.setText("R$ " + Decimal.formatar(total, "#,##0.00"));
-        tex_TotalPagar.setText("R$ " + Decimal.formatar(total, "#,##0.00"));
+        tex_vTotal.setText("R$ " + Decimal.formatar(total, "#,##0.00"));
+        tex_vTotalPagar.setText("R$ " + Decimal.formatar(total, "#,##0.00"));
         aplicarDesconto();
     }
 
     private void aplicarDesconto() {
         if ((tex_vDesconto.getText() == null || tex_vDesconto.getText().isEmpty())
-                || (tex_totalPagamento.getText() == null || tex_totalPagamento.getText().isEmpty())) {
+                || (tex_vMensalidade.getText() == null || tex_vMensalidade.getText().isEmpty())
+                || (tex_qtdMensalidade.getText() == null || tex_qtdMensalidade.getText().isEmpty())) {
             return;
         }
 
@@ -438,10 +538,10 @@ public class RecebimentosInserirEditarControle implements Initializable {
             return;
         }
 
-        double vTotalPagar = Decimal.valorFormatadoParseDouble(tex_totalPagamento.getText());
+        double vTotalPagar = vMensalidade * Integer.parseInt(tex_qtdMensalidade.getText());
         double vTotal = vTotalPagar - vDesconto;
 
-        tex_TotalPagar.setText("R$ " + Decimal.formatar(vTotal, "#,##0.00"));
+        tex_vTotalPagar.setText("R$ " + Decimal.formatar(vTotal, "#,##0.00"));
     }
 
     private void calcularTroco() {
@@ -450,7 +550,7 @@ public class RecebimentosInserirEditarControle implements Initializable {
             return;
         }
 
-        double troco = Decimal.valorFormatadoParseDouble(tex_vPago.getText()) - Decimal.valorFormatadoParseDouble(tex_TotalPagar.getText());
+        double troco = Decimal.valorFormatadoParseDouble(tex_vPago.getText()) - Decimal.valorFormatadoParseDouble(tex_vTotalPagar.getText());
         tex_vTroco.setText("R$ " + Decimal.formatar(troco, "#,##0.00"));
     }
 

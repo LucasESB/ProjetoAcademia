@@ -1,10 +1,12 @@
 package academia.entidades;
 
 import academia.bean.FormaPagamentoBean;
+import academia.utilitarios.DataHora;
+import academia.utilitarios.Decimal;
 
 import java.util.Date;
 
-public class Recebimentos {
+public class Recebimentos implements Cloneable {
     /**
      * Armazena o codigo sequencial do recebimento
      *
@@ -147,6 +149,11 @@ public class Recebimentos {
     public Recebimentos() {
     }
 
+    @Override
+    public Recebimentos clone() throws CloneNotSupportedException {
+        return (Recebimentos) super.clone();
+    }
+
     /**
      * Armazena o codigo sequencial do recebimento
      *
@@ -189,6 +196,10 @@ public class Recebimentos {
         return aluno;
     }
 
+    public String getNomeAluno() {
+        return aluno.getNome();
+    }
+
     /**
      * Armazena o id do aluno
      *
@@ -215,6 +226,10 @@ public class Recebimentos {
      */
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public String getNomeUsuario() {
+        return usuario.getNome();
     }
 
     /**
@@ -273,6 +288,10 @@ public class Recebimentos {
         return dataVencimento;
     }
 
+    public String getDataVencimentoFormatado() {
+        return DataHora.formatarData(dataVencimento, "dd/MM/yyyy");
+    }
+
     /**
      * Informa a data de vencimento do recebimento
      *
@@ -299,6 +318,10 @@ public class Recebimentos {
      */
     public Date getDataPagamento() {
         return dataPagamento;
+    }
+
+    public String getDataPagamentoFormatado() {
+        return DataHora.formatarData(dataPagamento, "dd/MM/yyyy");
     }
 
     /**
@@ -384,7 +407,7 @@ public class Recebimentos {
     }
 
     /**
-     * * Informa o valor do recebimento
+     * Informa o valor do recebimento
      *
      * <br> Tipo BD....: DECIMAL(10,2)
      * <br> Obrigatorio: true
@@ -397,8 +420,12 @@ public class Recebimentos {
         return vRecebimento;
     }
 
+    public String getVRecebimentoFormatado() {
+        return Decimal.formatar(vRecebimento, "#,##0.00");
+    }
+
     /**
-     * * Informa o valor do recebimento
+     * Informa o valor do recebimento
      *
      * <br> Tipo BD....: DECIMAL(10,2)
      * <br> Obrigatorio: true
@@ -423,6 +450,10 @@ public class Recebimentos {
      */
     public double getvDesconto() {
         return vDesconto;
+    }
+
+    public String getVDescontoFormatado() {
+        return Decimal.formatar(vDesconto, "#,##0.00");
     }
 
     /**
@@ -451,6 +482,10 @@ public class Recebimentos {
      */
     public double getvTotal() {
         return vTotal;
+    }
+
+    public String getVTotalFormatado() {
+        return Decimal.formatar(vTotal, "#,##0.00");
     }
 
     /**

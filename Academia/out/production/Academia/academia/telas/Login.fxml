@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -13,35 +15,41 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.LoginControle">
     <left>
         <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #0598FF;" BorderPane.alignment="CENTER">
-            <Label alignment="CENTER" layoutX="37.0" layoutY="205.0" prefHeight="90.0" prefWidth="276.0" text="Logo com nome do app" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" graphicTextGap="10.0" layoutX="37.0" layoutY="205.0" prefHeight="90.0" prefWidth="276.0" text="UpFit - Sistema" textAlignment="CENTER" textFill="WHITE">
                 <font>
-                    <Font size="21.0" />
+                    <Font name="Arial Bold" size="22.0" />
                 </font>
+            <graphic>
+               <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../assets/icons/upfitsistema.png" />
+                  </image>
+               </ImageView>
+            </graphic>
             </Label>
         </AnchorPane>
     </left>
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER">
-            <TextField fx:id="tex_login" layoutX="60.0" layoutY="221.0" prefHeight="30.0" prefWidth="230.0" promptText="Login" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
+            <TextField fx:id="tex_login" layoutX="60.0" layoutY="239.0" prefHeight="30.0" prefWidth="230.0" promptText="Login" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
             <cursor>
                <Cursor fx:constant="TEXT" />
             </cursor>
             <font>
                <Font size="13.0" />
             </font></TextField>
-            <Button fx:id="bot_logar" layoutX="60.0" layoutY="329.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="230.0" style="-fx-background-color: #0598FF;" text="Entrar" textFill="WHITE">
+            <Button fx:id="bot_logar" layoutX="60.0" layoutY="347.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="230.0" style="-fx-background-color: #0598FF;" text="Entrar" textFill="WHITE">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
             <font>
                <Font size="13.0" />
             </font></Button>
-            <Text fill="#0598ff" layoutX="146.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+            <Text fill="#0598ff" layoutX="146.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                 <font>
                     <Font name="System Bold" size="22.0" />
                 </font>
             </Text>
-            <Label layoutX="139.0" layoutY="140.0" text="Icone Usuario" textFill="#0598ff" />
             <Button layoutX="312.0" layoutY="5.0" mnemonicParsing="false" onAction="#sair" style="-fx-background-color: transparent;" text="X" textFill="#0598ff" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                 <font>
                     <Font name="Arial Black" size="15.0" />
@@ -50,15 +58,28 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             </Button>
-            <PasswordField fx:id="tex_senha" layoutX="59.0" layoutY="275.0" prefHeight="30.0" prefWidth="230.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
+            <PasswordField fx:id="tex_senha" layoutX="59.0" layoutY="293.0" prefHeight="30.0" prefWidth="230.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;">
             <cursor>
                <Cursor fx:constant="TEXT" />
             </cursor>
             <font>
                <Font size="13.0" />
             </font></PasswordField>
-            <Label layoutX="259.0" layoutY="219.0" prefHeight="30.0" text="Icone" textFill="#0598ff" />
-            <Label layoutX="259.0" layoutY="275.0" prefHeight="30.0" text="Icone" textFill="#0598ff" />
+         <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="144.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../assets/icons/userLogin.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="272.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../assets/icons/user%20(1).png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="272.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../assets/icons/lock.png" />
+            </image>
+         </ImageView>
         </AnchorPane>
     </center>
 </BorderPane>

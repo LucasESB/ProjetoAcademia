@@ -3,6 +3,7 @@ package academia.entidades;
 import academia.utilitarios.Textos;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -440,6 +441,18 @@ public class Alunos {
      */
     public int getDiaPrePagamento() {
         return diaPrePagamento;
+    }
+
+    /**
+     * Informa o dia de preferência do pagamento da mensalidade
+     *
+     * @return
+     */
+    public Date getDataPrePagamento(Date data){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(data);
+        cal.set(Calendar.DAY_OF_MONTH, getDiaPrePagamento());
+        return cal.getTime();
     }
 
     /**
