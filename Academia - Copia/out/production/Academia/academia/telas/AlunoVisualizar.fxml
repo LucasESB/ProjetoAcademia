@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="447.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.AlunoVisualizarControle">
+   <children>
+      <TabPane prefHeight="447.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Dados Usuário">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="32.0" layoutY="27.0" prefHeight="18.0" prefWidth="428.0" text="Nome" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tex_nome" editable="false" layoutX="15.0" layoutY="33.0" prefHeight="30.0" prefWidth="428.0" AnchorPane.leftAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="450.0" layoutY="15.0" prefHeight="18.0" prefWidth="135.0" text="Data Cadastro">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="75.0" prefHeight="18.0" prefWidth="135.0" text="CPF" AnchorPane.leftAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tex_cpf" editable="false" layoutX="15.0" layoutY="93.0" prefHeight="30.0" prefWidth="135.0" AnchorPane.leftAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="157.0" layoutY="75.0" prefHeight="18.0" prefWidth="135.0" text="Data de Nascimento">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tex_telefone" editable="false" layoutX="15.0" layoutY="152.0" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="15.0" layoutY="134.0" prefHeight="18.0" prefWidth="135.0" text="Telefone">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="443.0" layoutY="75.0" prefHeight="18.0" prefWidth="141.0" text="Sexo">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tex_sexo" editable="false" layoutX="443.0" layoutY="93.0" prefHeight="30.0" prefWidth="142.0" AnchorPane.rightAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="tex_email" editable="false" layoutX="15.0" layoutY="210.0" prefHeight="30.0" prefWidth="540.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="15.0" layoutY="192.0" prefHeight="18.0" prefWidth="428.0" text="E-mail" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="250.0" prefHeight="18.0" prefWidth="428.0" text="Observações" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="tex_observacoes" editable="false" layoutX="15.0" layoutY="269.0" prefHeight="134.0" prefWidth="570.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="269.0">
+                           <cursor>
+                              <Cursor fx:constant="DISAPPEAR" />
+                           </cursor>
+                        </TextArea>
+                        <TextField fx:id="tex_dataNascimento" editable="false" layoutX="157.0" layoutY="93.0" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="tex_dataCadastro" editable="false" layoutX="450.0" layoutY="33.0" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="300.0" layoutY="75.0" prefHeight="18.0" prefWidth="135.0" text="Dia Pre. Pagamento">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tex_diaPrePagamento" editable="false" layoutX="300.0" layoutY="93.0" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="tex_whatsapp" editable="false" layoutX="159.0" layoutY="152.0" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TextField>
+                        <Label layoutX="159.0" layoutY="134.0" prefHeight="18.0" prefWidth="135.0" text="WhatsApp">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Recebimentos">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Histórico de Recebimentos">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
+                     </top>
+                     <center>
+                        <TableView fx:id="tab_recebimentos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="col_dataVencimento" prefWidth="92.79999083280563" text="Dat. Vencimento" />
+                            <TableColumn fx:id="dat_Pagamento" prefWidth="83.20001220703125" text="Dat. Pagamento" />
+                              <TableColumn fx:id="col_vMensalidade" prefWidth="103.19999694824219" text="Vl. Mensalidade" />
+                              <TableColumn fx:id="col_vDesconto" prefWidth="100.0" text="Vl. Desconto" />
+                              <TableColumn fx:id="col_vTotal" prefWidth="100.7999267578125" text="Vl. Total" />
+                              <TableColumn fx:id="col_situacao" prefWidth="100.00006103515625" text="Situração" />
+                          </columns>
+                           <BorderPane.margin>
+                              <Insets bottom="15.0" left="15.0" right="15.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                  </BorderPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

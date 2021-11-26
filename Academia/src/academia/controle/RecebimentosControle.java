@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,9 @@ public class RecebimentosControle implements Initializable {
 
     @FXML
     private Button bot_pesquisar;
+
+    @FXML
+    private ComboBox<?> cai_mesRecebimento;
 
     @FXML
     private TableColumn<Recebimentos, String> col_aluno;
@@ -61,12 +65,15 @@ public class RecebimentosControle implements Initializable {
     private TableView<Recebimentos> tab_recebimentos;
 
     @FXML
+    private TextField tex_anoRecebimento;
+
+    @FXML
     private TextField tex_vAreceber;
 
     @FXML
     private TextField tex_vRecebidos;
 
-    public static AnchorPane janela;
+    public static BorderPane janela;
     /**
      * Objeto de conexão com a tabela recebimentos
      */
@@ -234,11 +241,11 @@ public class RecebimentosControle implements Initializable {
         RecebimentosAReceberControle.abrirTela();
     }
 
-    public static AnchorPane getInstancia() throws IOException {
+    public static BorderPane getInstancia() throws IOException {
         if (janela == null) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Objects.requireNonNull(TurmasControle.class.getResource("/academia/telas/Recebimentos.fxml")));
-            janela = (AnchorPane) loader.load();
+            janela = (BorderPane) loader.load();
         }
 
         return janela;

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.TurmaVisualizarControle">
+   <children>
+      <Label layoutX="39.0" layoutY="107.0" prefHeight="18.0" prefWidth="428.0" text="Descrição" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tex_descricao" editable="false" layoutX="15.0" layoutY="33.0" prefHeight="30.0" prefWidth="428.0" AnchorPane.leftAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </TextField>
+      <Label layoutX="450.0" layoutY="15.0" prefHeight="18.0" prefWidth="135.0" text="Valor Mensalidade" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tex_vMensalidade" alignment="CENTER_RIGHT" editable="false" layoutX="450.0" layoutY="33.0" prefHeight="30.0" prefWidth="135.0" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </TextField>
+      <TableView fx:id="tab_alunos" layoutX="15.0" layoutY="76.0" prefHeight="308.0" prefWidth="570.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <columns>
+          <TableColumn fx:id="col_nome" editable="false" prefWidth="474.4000244140625" text="Nome" />
+          <TableColumn fx:id="col_telefone" editable="false" minWidth="0.0" prefWidth="95.20001220703125" text="Telefone" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
