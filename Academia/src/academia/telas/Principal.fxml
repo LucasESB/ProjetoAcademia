@@ -180,7 +180,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="Arial" size="16.0" />
+                        <Font name="Arial Black" size="17.0" />
                      </font>
                   </Label>
                   <Label alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="20.0" text="1.0" textFill="WHITE">

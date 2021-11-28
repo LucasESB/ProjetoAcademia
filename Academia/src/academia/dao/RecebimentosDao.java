@@ -264,4 +264,19 @@ public class RecebimentosDao {
 
         return 0.00;
     }
+
+    public double getvAReceberDoDia(Date periodo) throws SQLException {
+        String sql = "SELECT SUM(vMensalidade) as 'vMensalidade' FROM alunos INNER JOIN turmas INNER JOIN turmasalunos ON (turmasalunos.aluno_id, turmas.id) = (alunos.id, turmasalunos.turma_id) ";
+
+
+        String data = DataHora.formatarData(periodo, "yyyy-MM-dd");
+        sql += "WHERE alunos.id NOT IN (SELECT recebimentos.aluno_id FROM recebimentos WHERE dataVencimento >= '" + data + " 00:00:00' ";
+        sql += "AND dataVencimento <= '" + data + " 23:59:59')";
+
+        ResultSet resultSet = db.getResultset(sql);
+
+        if (resultSet.next()) return resultSet.getDouble("vMensalidade");
+
+        return 0.00;
+    }
 }

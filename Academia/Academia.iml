@@ -8,16 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="javafx-fxml">
+      <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/11/javafx-fxml-11.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/11/javafx-fxml-11-win.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/11/javafx-controls-11.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/11/javafx-controls-11-win.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11/javafx-graphics-11.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11/javafx-graphics-11-win.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11/javafx-base-11.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11/javafx-base-11-win.jar!/" />
+          <root url="jar://$MODULE_DIR$/../binario/mysql-connector-java-8.0.26.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -26,10 +19,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../binario/mysql-connector-java-8.0.26.jar!/" />
+          <root url="file://C:/Program Files/Java/javafx-sdk-17.0.1/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://C:/Program Files/Java/javafx-sdk-17.0.1/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>

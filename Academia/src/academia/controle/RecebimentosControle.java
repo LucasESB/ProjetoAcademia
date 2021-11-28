@@ -4,6 +4,7 @@ import academia.dao.RecebimentosDao;
 import academia.entidades.Recebimentos;
 import academia.utilitarios.DataHora;
 import academia.utilitarios.Decimal;
+import academia.utilitarios.Mascaras;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class RecebimentosControle implements Initializable {
     private Button bot_pesquisar;
 
     @FXML
-    private ComboBox<?> cai_mesRecebimento;
+    private ComboBox<String> cai_mesRecebimento;
 
     @FXML
     private TableColumn<Recebimentos, String> col_aluno;
@@ -95,7 +95,22 @@ public class RecebimentosControle implements Initializable {
         col_vDesconto.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("vDescontoFormatado"));
         col_vMensalidade.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("vRecebimentoFormatado"));
         col_vTotal.setCellValueFactory(new PropertyValueFactory<Recebimentos, String>("vTotalFormatado"));
+
+        setMascaras();
+        loadDatas();
         setEventos();
+    }
+
+    private void setMascaras() {
+        Mascaras.maxField(tex_anoRecebimento, 4);
+        Mascaras.mascararNumeroInteiro(tex_anoRecebimento);
+    }
+
+    private void loadDatas() {
+        Date dataAtual = new Date();
+        tex_anoRecebimento.setText(Integer.toString(DataHora.getData(dataAtual, DataHora.ANO)));
+        cai_mesRecebimento.setItems(FXCollections.observableList(DataHora.getListMesesExtenso()));
+        cai_mesRecebimento.getSelectionModel().select(DataHora.getData(dataAtual, DataHora.MES));
     }
 
     private void setEventos() {
@@ -131,8 +146,18 @@ public class RecebimentosControle implements Initializable {
     };
 
     private void pesquisar() throws Exception {
+        if (isAnoIvalido()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Janela de Erro");
+            alert.setContentText("O ano informado está em um formato invalido");
+            alert.show();
+            return;
+        }
+
         Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
+        cal.set(Calendar.YEAR, Integer.parseInt(tex_anoRecebimento.getText()));
+        cal.set(Calendar.MONTH, cai_mesRecebimento.getSelectionModel().getSelectedIndex());
         cal.set(Calendar.DAY_OF_MONTH, 1);
 
         String data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
@@ -147,6 +172,14 @@ public class RecebimentosControle implements Initializable {
 
         tab_recebimentos.setItems(observableListRecebimentos);
         calcularTotais();
+    }
+
+    private boolean isAnoIvalido() {
+        if (tex_anoRecebimento.getText().length() < 4) {
+            return true;
+        }
+
+        return false;
     }
 
     private void inserir() throws Exception {
@@ -174,7 +207,15 @@ public class RecebimentosControle implements Initializable {
     private void calcularTotais() throws Exception {
         double totalRecebido = observableListRecebimentos.stream().mapToDouble(r -> r.getvTotal()).sum();
         tex_vRecebidos.setText("R$ " + Decimal.formatar(totalRecebido, "#,##0.00"));
-        tex_vAreceber.setText("R$ " + Decimal.formatar(recebimentoDao.getvAReceberDoMes(new Date()), "#,##0.00"));
+
+        if (tex_anoRecebimento.getText().isEmpty()) {
+            return;
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Integer.parseInt(tex_anoRecebimento.getText()));
+        cal.set(Calendar.MONTH, cai_mesRecebimento.getSelectionModel().getSelectedIndex());
+        tex_vAreceber.setText("R$ " + Decimal.formatar(recebimentoDao.getvAReceberDoMes(cal.getTime()), "#,##0.00"));
     }
 
     private void editar() throws Exception {
@@ -238,7 +279,10 @@ public class RecebimentosControle implements Initializable {
     }
 
     private void aReceber() throws Exception {
-        RecebimentosAReceberControle.abrirTela();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Integer.parseInt(tex_anoRecebimento.getText()));
+        cal.set(Calendar.MONTH, cai_mesRecebimento.getSelectionModel().getSelectedIndex());
+        RecebimentosAReceberControle.abrirTela(cal.getTime());
     }
 
     public static BorderPane getInstancia() throws IOException {

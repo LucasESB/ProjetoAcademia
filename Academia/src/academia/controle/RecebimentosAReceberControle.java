@@ -49,6 +49,8 @@ public class RecebimentosAReceberControle implements Initializable {
      */
     private static RecebimentosAReceberControle instancia;
 
+    private Date periodo;
+
     /**
      * Objeto de conexão com a tabela recebimentos
      */
@@ -71,13 +73,13 @@ public class RecebimentosAReceberControle implements Initializable {
     }
 
     private void loadRecebimentosAReceber() throws Exception {
-        tab_recebimentoAReceber.setItems(FXCollections.observableList(recebimentosDao.getRecebimentosAReceber(new Date())));
+        tab_recebimentoAReceber.setItems(FXCollections.observableList(recebimentosDao.getRecebimentosAReceber(periodo)));
     }
 
     /**
      * Metodo responsavel por abrir a janela
      */
-    public static void abrirTela() throws Exception {
+    public static void abrirTela(Date periodo) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(RecebimentosAReceberControle.class.getResource("/academia/telas/RecebimentosAReceber.fxml"));
         StackPane page = (StackPane) loader.load();
@@ -94,6 +96,7 @@ public class RecebimentosAReceberControle implements Initializable {
 
         try {
             instancia = loader.getController();
+            instancia.periodo = periodo;
             instancia.configuracoes();
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -9,14 +9,28 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="445.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.AlunosControle">
     <top>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="656.0" BorderPane.alignment="CENTER">
+        <GridPane prefHeight="90.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
             <children>
-                <TextField fx:id="tex_nome" prefHeight="30.0" prefWidth="261.0" promptText="Pesquise pelo nome do Aluno">
+                <TextField fx:id="tex_nome" prefHeight="30.0" prefWidth="261.0" promptText="Pesquise pelo nome do Aluno" GridPane.columnIndex="1" GridPane.columnSpan="4">
                     <cursor>
                         <Cursor fx:constant="TEXT" />
                     </cursor>
@@ -24,7 +38,7 @@
                         <Font name="Arial" size="13.0" />
                     </font>
                 </TextField>
-                <Button fx:id="bot_pesquisar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #58BAFF;" text="Pesquisar" textFill="WHITE">
+                <Button fx:id="bot_pesquisar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #58BAFF;" text="Pesquisar" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="2">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -40,14 +54,14 @@
                     </graphic>
                 </Button>
             </children>
-        </HBox>
+        </GridPane>
     </top>
     <center>
-        <TableView fx:id="tab_alunos" prefHeight="238.0" prefWidth="585.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tab_alunos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="238.0" prefWidth="585.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="col_codigo" editable="false" minWidth="75.0" prefWidth="75.0" text="Código" />
-                <TableColumn fx:id="col_nome" editable="false" prefWidth="411.1999969482422" text="Nome" />
-            <TableColumn fx:id="col_telefone" prefWidth="138.4000244140625" text="Telefone" />
+                <TableColumn fx:id="col_nome" editable="false" maxWidth="1.7976931348623157E308" prefWidth="411.1999969482422" text="Nome" />
+                <TableColumn fx:id="col_telefone" maxWidth="1.7976931348623157E308" prefWidth="138.4000244140625" text="Telefone" />
             </columns>
             <BorderPane.margin>
                 <Insets left="15.0" right="15.0" />
@@ -55,12 +69,22 @@
         </TableView>
     </center>
     <bottom>
-        <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+    </bottom>
+    <bottom>
+        <GridPane hgap="5.0" prefHeight="60.0" prefWidth="656.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
             <children>
-                <Button fx:id="bot_inserir" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Inserir">
-                    <HBox.margin>
-                        <Insets right="5.0" />
-                    </HBox.margin>
+                <Button fx:id="bot_visualizar" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #FFF;" stylesheets="@../assets/css/botaoBase.css" text="Visualizar" GridPane.columnIndex="5">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -70,15 +94,27 @@
                     <graphic>
                         <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../assets/icons/add.png" />
+                                <Image url="@../assets/icons/visualizar.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="bot_editar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Editar">
-                    <HBox.margin>
-                        <Insets right="5.0" />
-                    </HBox.margin>
+                <Button fx:id="bot_excluir" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #FFF;" stylesheets="@../assets/css/botaoBase.css" text="Excluir" GridPane.columnIndex="4">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/icons/remove.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="bot_editar" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Editar" GridPane.columnIndex="3">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -93,7 +129,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="bot_excluir" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #FFF;" stylesheets="@../assets/css/botaoBase.css" text="Excluir">
+                <Button fx:id="bot_inserir" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Inserir" GridPane.columnIndex="2">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -103,39 +139,15 @@
                     <graphic>
                         <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../assets/icons/remove.png" />
+                                <Image url="@../assets/icons/add.png" />
                             </image>
                         </ImageView>
                     </graphic>
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
                 </Button>
-            <Button fx:id="bot_visualizar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #FFF;" stylesheets="@../assets/css/botaoBase.css" text="Visualizar">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/icons/visualizar.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Button>
             </children>
             <BorderPane.margin>
-                <Insets />
+                <Insets left="15.0" right="15.0" />
             </BorderPane.margin>
-            <padding>
-                <Insets right="10.0" />
-            </padding>
-        </HBox>
+        </GridPane>
     </bottom>
 </BorderPane>

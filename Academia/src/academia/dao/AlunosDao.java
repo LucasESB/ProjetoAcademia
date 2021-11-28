@@ -3,10 +3,13 @@ package academia.dao;
 import academia.conexao.MySql;
 import academia.conexao.Sql;
 import academia.entidades.Alunos;
+import academia.utilitarios.DataHora;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AlunosDao {
 
@@ -180,8 +183,37 @@ public class AlunosDao {
 
         ResultSet resultSet = db.getResultset(sql, aluno.getId());
 
-        if(resultSet.next()) return resultSet.getDouble("vMensalidade");
+        if (resultSet.next()) return resultSet.getDouble("vMensalidade");
 
-        return  0.00;
+        return 0.00;
+    }
+
+    public int getQtdNovosAlunos(Date periodo) throws SQLException {
+        String sql = "SELECT COUNT(*) AS 'qtd' FROM alunos WHERE ";
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(periodo);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+
+        String data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+        sql += "datacadastro >= '" + data + " 00:00:00' ";
+
+
+        cal.set(Calendar.DAY_OF_MONTH, DataHora.getUltimoDiaDoMes(cal.getTime()));
+        data = DataHora.formatarData(cal.getTime(), "yyyy-MM-dd");
+        sql += "AND datacadastro <= '" + data + " 23:59:59'";
+
+        ResultSet resultSet = db.getResultset(sql);
+
+        if (resultSet.next()) return resultSet.getInt("qtd");
+
+        return 0;
+    }
+
+    public int getQtdAlunosAtivos() throws SQLException {
+        ResultSet resultSet = db.getResultset("SELECT COUNT(DISTINCT aluno_id) AS 'qtd' FROM turmasalunos");
+
+        if(resultSet.next()) return resultSet.getInt("qtd");
+
+        return 0;
     }
 }

@@ -3,198 +3,217 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="445.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.RecebimentosControle">
-      <BorderPane prefHeight="445.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <bottom>
-            <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="656.0" BorderPane.alignment="CENTER">
-               <children>
-               <GridPane prefHeight="80.0" prefWidth="198.0">
-                 <columnConstraints>
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0000244140625" minWidth="10.0" prefWidth="100.0" />
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.20001220703125" minWidth="10.0" prefWidth="100.0" />
-                 </columnConstraints>
-                 <rowConstraints>
-                   <RowConstraints maxHeight="35.599951171875" minHeight="10.0" prefHeight="35.599951171875" valignment="BOTTOM" vgrow="SOMETIMES" />
-                   <RowConstraints maxHeight="51.60001220703125" minHeight="10.0" prefHeight="45.200048828125" valignment="TOP" vgrow="SOMETIMES" />
-                 </rowConstraints>
-                  <children>
-                     <TextField fx:id="tex_vRecebidos" alignment="CENTER_RIGHT" editable="false" prefHeight="30.0" prefWidth="94.0" promptText="R$ 0,00" GridPane.rowIndex="1">
-                        <font>
-                           <Font name="Arial" size="13.0" />
-                        </font>
-                        <GridPane.margin>
-                           <Insets right="5.0" />
-                        </GridPane.margin>
-                     </TextField>
-                     <TextField fx:id="tex_vAreceber" alignment="CENTER_RIGHT" editable="false" prefHeight="30.0" prefWidth="94.0" promptText="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <font>
-                           <Font name="Arial" size="13.0" />
-                        </font>
-                     </TextField>
-                     <Label text="Recebidos">
-                        <font>
-                           <Font name="Arial Bold" size="13.0" />
-                        </font>
-                     </Label>
-                     <Label text="A Receber" GridPane.columnIndex="1">
-                        <font>
-                           <Font name="Arial Bold" size="13.0" />
-                        </font>
-                     </Label>
-                  </children>
-                  <HBox.margin>
-                     <Insets right="6.0" />
-                  </HBox.margin>
-               </GridPane>
-                  <Button fx:id="bot_inserir" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Inserir">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/icons/add.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets right="5.0" top="20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="bot_editar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Editar">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/icons/edit.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets right="5.0" top="20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="bot_excluir" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Excluir">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/icons/remove.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  <HBox.margin>
-                     <Insets right="5.0" top="20.0" />
-                  </HBox.margin>
-                  </Button>
-               <Button fx:id="bot_aReceber" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="107.0" stylesheets="@../assets/css/botaoBase.css" text="A Receber">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                  <font>
-                     <Font size="13.0" />
-                  </font>
-                  <graphic>
-                     <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../assets/icons/income.png" />
-                        </image>
-                     </ImageView>
-                  </graphic>
-                  <HBox.margin>
-                     <Insets top="20.0" />
-                  </HBox.margin>
-               </Button>
-               </children>
-               <padding>
-                  <Insets right="15.0" />
-               </padding>
-            </HBox>
-         </bottom>
-         <center>
-            <TableView fx:id="tab_recebimentos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <columns>
+<BorderPane prefHeight="445.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="academia.controle.RecebimentosControle">
+    <center>
+        <TableView fx:id="tab_recebimentos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
                 <TableColumn fx:id="col_datPagamento" prefWidth="75.0" text="Dat. Pagamento" />
                 <TableColumn fx:id="col_datVencimento" prefWidth="75.0" text="Dat. Vencimento" />
-               <TableColumn fx:id="col_aluno" prefWidth="105.59996032714844" text="Aluno" />
-               <TableColumn fx:id="col_vMensalidade" prefWidth="88.79998779296875" text="Vl. Mensalidade" />
-               <TableColumn fx:id="col_vDesconto" prefWidth="76.0" text="Vl. Desconto" />
-               <TableColumn fx:id="col_vTotal" prefWidth="75.20001220703125" text="Vl. Total" />
-               <TableColumn fx:id="col_usuarioRecebimento" prefWidth="131.99993896484375" text="Usuário Rec." />
-              </columns>
-               <BorderPane.margin>
-                  <Insets left="15.0" right="15.0" />
-               </BorderPane.margin>
-            </TableView>
-         </center>
-      <top>
-         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="656.0" BorderPane.alignment="CENTER">
-            <children>
-               <Label text="Recebimentos Referente ao Mês Atual">
-                  <font>
-                     <Font name="Arial Bold" size="14.0" />
-                  </font>
-               </Label>
-               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="385.0">
-                  <HBox.margin>
-                     <Insets />
-                  </HBox.margin>
-                  <padding>
-                     <Insets right="15.0" />
-                  </padding>
-                  <children>
-                     <Button fx:id="bot_pesquisar" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #58BAFF;" text="Pesquisar" textFill="WHITE">
-                        <font>
-                           <Font name="Arial" size="13.0" />
-                        </font>
-                        <graphic>
-                           <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@../assets/icons/lupa.png" />
-                              </image>
-                           </ImageView>
-                        </graphic>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </children>
-               </HBox>
-            </children>
+                <TableColumn fx:id="col_aluno" prefWidth="105.59996032714844" text="Aluno" />
+                <TableColumn fx:id="col_vMensalidade" prefWidth="88.79998779296875" text="Vl. Mensalidade" />
+                <TableColumn fx:id="col_vDesconto" prefWidth="76.0" text="Vl. Desconto" />
+                <TableColumn fx:id="col_vTotal" prefWidth="75.20001220703125" text="Vl. Total" />
+                <TableColumn fx:id="col_usuarioRecebimento" prefWidth="131.99993896484375" text="Usuário Rec." />
+            </columns>
             <BorderPane.margin>
-               <Insets />
+                <Insets left="15.0" right="15.0" />
             </BorderPane.margin>
-            <padding>
-               <Insets left="15.0" />
-            </padding>
-         </HBox>
-      </top>
-      </BorderPane>
-</AnchorPane>
+        </TableView>
+    </center>
+   <top>
+      <GridPane hgap="5.0" prefHeight="90.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <BorderPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </BorderPane.margin>
+         <children>
+            <VBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="100.0" GridPane.columnIndex="4">
+               <children>
+                        <Button fx:id="bot_pesquisar" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #58BAFF;" text="Pesquisar" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="13.0" />
+                            </font>
+                            <graphic>
+                                <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../assets/icons/lupa.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                     <VBox.margin>
+                        <Insets top="14.0" />
+                     </VBox.margin>
+                        </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                        <Label text="Mês Recebimento">
+                            <font>
+                                <Font name="Arial" size="13.0" />
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="cai_mesRecebimento" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="104.0" promptText="Selecione" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+               <children>
+                        <Label text="Ano Recebimento">
+                            <font>
+                                <Font name="Arial" size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tex_anoRecebimento" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+   </top>
+   <bottom>
+      <GridPane hgap="5.0" prefHeight="80.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <BorderPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </BorderPane.margin>
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Recebidos">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tex_vRecebidos" alignment="CENTER_RIGHT" editable="false" prefHeight="30.0" prefWidth="94.0" promptText="R$ 0,00">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+               <children>
+                        <Label text="A Receber">
+                            <font>
+                                <Font name="Arial Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tex_vAreceber" alignment="CENTER_RIGHT" editable="false" prefHeight="30.0" prefWidth="94.0" promptText="R$ 0,00">
+                            <font>
+                                <Font name="Arial" size="13.0" />
+                            </font>
+                        </TextField>
+               </children>
+            </VBox>
+                <Button fx:id="bot_inserir" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Inserir" GridPane.columnIndex="4">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/icons/add.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+                </Button>
+                <Button fx:id="bot_editar" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Editar" GridPane.columnIndex="5">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/icons/edit.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+                </Button>
+                <Button fx:id="bot_excluir" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../assets/css/botaoBase.css" text="Excluir" GridPane.columnIndex="6">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/icons/remove.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+                </Button>
+                <Button fx:id="bot_aReceber" graphicTextGap="5.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="107.0" stylesheets="@../assets/css/botaoBase.css" text="A Receber" GridPane.columnIndex="3">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/icons/income.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+                </Button>
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>

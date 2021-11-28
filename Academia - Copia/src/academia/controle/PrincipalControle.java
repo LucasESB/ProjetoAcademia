@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 public class PrincipalControle implements Initializable {
 
     @FXML
-    private AnchorPane areaVisualizacao;
+    private GridPane areaVisualizacao;
 
     @FXML
     private Button bot_menuItemAlunos;
