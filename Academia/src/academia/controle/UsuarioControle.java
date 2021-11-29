@@ -40,7 +40,7 @@ public class UsuarioControle implements Initializable {
     private TableView<Usuario> tab_usuarios;
 
     @FXML
-    private TableColumn<Usuario, Boolean> col_adm;
+    private TableColumn<Usuario, String> col_adm;
 
     @FXML
     private TableColumn<Usuario, Integer> col_codigo;
@@ -63,7 +63,7 @@ public class UsuarioControle implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        col_adm.setCellValueFactory(new PropertyValueFactory<Usuario, Boolean>("admin"));
+        col_adm.setCellValueFactory(new PropertyValueFactory<Usuario, String>("admDescricao"));
         col_codigo.setCellValueFactory(new PropertyValueFactory<Usuario, Integer>("id"));
         col_nome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nome"));
 

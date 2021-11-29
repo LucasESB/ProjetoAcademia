@@ -55,7 +55,8 @@ public class Usuario {
     /**
      * Construtor
      */
-    public Usuario(){ }
+    public Usuario() {
+    }
 
     public Usuario(int id, String nome) {
         this.id = id;
@@ -186,6 +187,10 @@ public class Usuario {
      */
     public boolean isAdmin() {
         return admin;
+    }
+
+    public String getAdmDescricao() {
+        return admin ? "Sim" : "Não";
     }
 
     /**
