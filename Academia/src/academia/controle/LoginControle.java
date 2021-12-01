@@ -51,8 +51,8 @@ public class LoginControle  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tex_login.setText("Master");
-        tex_senha.setText("Master");
+//        tex_login.setText("Master");
+//        tex_senha.setText("Master");
         setEventos();
     }
 

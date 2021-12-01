@@ -161,6 +161,13 @@ public class UsuarioControle implements Initializable {
         if (usuario == null) {
             alertaSelecioneUmRegistro();
             return;
+        } else if (usuario.getId() == 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setHeaderText("Janela de Aviso");
+            alert.setContentText("O usuario padrão do sistema não pode ser alterado.");
+            alert.show();
+            return;
         }
 
         UsuarioInserirEditarControle.showDialogEditar(usuario);
@@ -180,6 +187,13 @@ public class UsuarioControle implements Initializable {
 
         if (usuario == null) {
             alertaSelecioneUmRegistro();
+            return;
+        } else if (usuario.getId() == 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setHeaderText("Janela de Aviso");
+            alert.setContentText("O usuario padrão do sistema não pode ser alterado.");
+            alert.show();
             return;
         }
 

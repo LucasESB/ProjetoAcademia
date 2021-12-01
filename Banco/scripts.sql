@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     PRIMARY KEY (id)
 ) COMMENT 'Armazena os usuarios do sistema';
 
-INSERT IGNORE INTO usuarios (login, nome, senha, admin) VALUES ('Master', 'MASTER', 'b8e8b80c9a269375a8526b12eefc8cbf', true);
+INSERT IGNORE INTO usuarios (id, login, nome, senha, admin) VALUES (1, 'Master', 'MASTER', 'b8e8b80c9a269375a8526b12eefc8cbf', true);
 
 DROP TABLE IF EXISTS alunos;
 CREATE TABLE IF NOT EXISTS alunos (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS alunos (
     sexo				ENUM ('M','F') NOT NULL COMMENT 'Informa o sexo do aluno M - Masculino F - Feminino',
     datanascimento 		DATETIME NOT NULL COMMENT 'Informa a data de nascimento do aluno',
     datacadastro 		DATETIME NOT NULL COMMENT 'Informa a data em que o aluno em questão foi cadastrado',
-    diaPrePagamento 	TINYINT UNSIGNED NOT NULL COMMENT 'Informa o dia de preferência do pagamento da mensalidade',
+    diaprepagamento 	TINYINT UNSIGNED NOT NULL COMMENT 'Informa o dia de preferência do pagamento da mensalidade',
     observacao			TEXT NULL COMMENT 'Informa uma observação sobre o aluno',
     KEY idx_id (id),
     PRIMARY KEY (id)
@@ -42,22 +42,22 @@ CREATE TABLE IF NOT EXISTS recebimentos (
     aluno_nome 			VARCHAR(40) NOT NULL COMMENT 'Informa o nome do aluno',
     usuario_id			SMALLINT UNSIGNED NOT NULL COMMENT 'Armazena o id do usuario que inseriu o registro',
     usuario_nome 		VARCHAR(30) NOT NULL COMMENT 'Informa o nome do usuario',
-    usuarioEdicao_id	SMALLINT UNSIGNED NULL COMMENT 'Armazena o id do ultimo usuario que editou o registro',
-    usuarioEdicao_nome 	VARCHAR(30) NULL COMMENT 'Informa o nome do ultimo usuario que editou o registro',
-    dataVencimento  	DATETIME NOT NULL COMMENT 'Informa a data de vencimento do recebimento',
-    dataPagamento 		DATETIME NOT NULL COMMENT 'Informa a data de pagamento do recebimento',
-    dataEdicao 			DATETIME NULL COMMENT 'Informa a data da ultima edição feita no recebimento',
-    formaPagamento		ENUM ('1', '2', '3', '4', '5') NOT NULL COMMENT 'Informa a forma de pagamento utilizada sendo: 1 - Dinheiro, 2 - PIX, 3 - Transferência, 4 - Cartão de Crédito, 5 - Cartão de Débito',
-    vRecebimento		DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor do recebimento',
-    vDesconto			DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor de disconto aplicado no recebimento',
-    vTotal				DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor total do recebimento',
+    usuarioedicao_id	SMALLINT UNSIGNED NULL COMMENT 'Armazena o id do ultimo usuario que editou o registro',
+    usuarioedicao_nome 	VARCHAR(30) NULL COMMENT 'Informa o nome do ultimo usuario que editou o registro',
+    datavencimento  	DATETIME NOT NULL COMMENT 'Informa a data de vencimento do recebimento',
+    datapagamento 		DATETIME NOT NULL COMMENT 'Informa a data de pagamento do recebimento',
+    dataedicao 			DATETIME NULL COMMENT 'Informa a data da ultima edição feita no recebimento',
+    formapagamento		ENUM ('1', '2', '3', '4', '5') NOT NULL COMMENT 'Informa a forma de pagamento utilizada sendo: 1 - Dinheiro, 2 - PIX, 3 - Transferência, 4 - Cartão de Crédito, 5 - Cartão de Débito',
+    vrecebimento		DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor do recebimento',
+    vdesconto			DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor de disconto aplicado no recebimento',
+    vtotal				DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor total do recebimento',
     matricula			TINYINT(1) NOT NULL DEFAULT b'0' COMMENT 'Informa se o recebimento é da maatriculo',
     excluido			TINYINT(1) NOT NULL DEFAULT b'0' COMMENT 'Informa se o recebimento está marcado como excluido',
     KEY idx_id (id),
     KEY idx_aluno_id (aluno_id),
     KEY idx_usuario_id (usuario_id),
-    KEY idx_dataVencimento (dataVencimento),
-    KEY idx_dataPagamento (dataPagamento),
+    KEY idx_dataVencimento (datavencimento),
+    KEY idx_dataPagamento (datapagamento),
     PRIMARY KEY (id)
 ) COMMENT 'Armazena os recebimentos realizados';
 
@@ -65,13 +65,13 @@ DROP TABLE IF EXISTS turmas;
 CREATE TABLE IF NOT EXISTS turmas (
 	id 				MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Armazena o codigo sequencial da turma',
     descricao 		VARCHAR(40) NOT NULL COMMENT 'Informa a descrição da turma',
-    vMensalidade	DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor do recebimento',
+    vmensalidade	DECIMAL(10,2) NOT NULL COMMENT 'Informa o valor do recebimento',
     KEY idx_id (id),
     PRIMARY KEY (id)
 ) COMMENT 'Armazena as turmas do sistema';
 
-DROP TABLE IF EXISTS turmasAlunos;
-CREATE TABLE IF NOT EXISTS turmasAlunos (
+DROP TABLE IF EXISTS turmasalunos;
+CREATE TABLE IF NOT EXISTS turmasalunos (
 	turma_id 		MEDIUMINT UNSIGNED NOT NULL COMMENT 'Armazena o codigo sequencial da turma',
     aluno_id 		MEDIUMINT UNSIGNED  NOT NULL COMMENT 'Informa a descrição da turma',
     KEY idx_turma_id (turma_id),
@@ -81,5 +81,13 @@ CREATE TABLE IF NOT EXISTS turmasAlunos (
     CONSTRAINT fk_turmasAlunos_aluno FOREIGN KEY (aluno_id) REFERENCES alunos (id) ON UPDATE CASCADE ON DELETE CASCADE
 ) COMMENT 'Armazena as turmas do sistema';
 
+DROP TABLE IF EXISTS serial;
+CREATE TABLE IF NOT EXISTS serial (
+	serial VARCHAR(32) NOT NULL COMMENT '',
+    dataaplicacao DATE NOT NULL COMMENT '',
+    qtddiasserial SMALLINT NOT NULL COMMENT '',
+    qtddiasusados SMALLINT NOT NULL COMMENT '',
+    PRIMARY KEY (serial)
+);
 
 
