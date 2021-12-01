@@ -80,14 +80,3 @@ CREATE TABLE IF NOT EXISTS turmasalunos (
     CONSTRAINT fk_turmasAlunos_turma FOREIGN KEY (turma_id) REFERENCES turmas (id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_turmasAlunos_aluno FOREIGN KEY (aluno_id) REFERENCES alunos (id) ON UPDATE CASCADE ON DELETE CASCADE
 ) COMMENT 'Armazena as turmas do sistema';
-
-DROP TABLE IF EXISTS serial;
-CREATE TABLE IF NOT EXISTS serial (
-	serial VARCHAR(32) NOT NULL COMMENT '',
-    dataaplicacao DATE NOT NULL COMMENT '',
-    qtddiasserial SMALLINT NOT NULL COMMENT '',
-    qtddiasusados SMALLINT NOT NULL COMMENT '',
-    PRIMARY KEY (serial)
-);
-
-
